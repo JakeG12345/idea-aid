@@ -1,0 +1,11 @@
+<h1>{{ question }}</h1>
+
+<form action="/quiz" method="post">
+    <div>
+        {% for option in options %}
+            <button type="submit" name="option" value="{{ option }}">
+                {{ option }}
+            </button>
+        {% endfor %}
+    </div>
+</form>
