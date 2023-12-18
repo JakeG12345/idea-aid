@@ -4,23 +4,21 @@ import os
 from flask import Flask, flash, redirect, render_template, request, session
 # from flask_session import Session
 # from werkzeug.security import check_password_hash, generate_password_hash
-import openai
+from openai import OpenAI
+client = OpenAI()
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    
-    print("YO 2")
-    
-    print("api key:", os.environ.get("OPENAI_API_KEY"))
-    openai.api_key = os.environ.get("OPENAI_API_KEY")
-
-    response = openai.embeddings.create(
-        model="text-embedding-ada-002",
-        input="The food was delicious and the waiter..."
+    completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
+        {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
+    ]
     )
 
-    print(response)
+    print(completion.choices[0].message)
 
     return render_template("index.html")
