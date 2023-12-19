@@ -57,8 +57,7 @@ def quiz():
     print("Quiz selections:", quiz_selections)
     print("Options:", options)
 
-    # return render_template("index.html")
-
+    return render_template("quiz.html", question=question, options=options)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -112,6 +111,3 @@ def login():
 
     else:
         return render_template("login.html")
-    
-
-    return render_template("quiz.html", question=question, options=options)
