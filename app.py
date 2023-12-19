@@ -22,12 +22,13 @@ def index():
 
     return render_template("index.html")
 
-@app.route("/quiz")
+@app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     quiz_selections = []
 
     if request.method == "POST":
         selection = request.form.get("option")
+        print(selection)
         # global quiz_selections
         # quiz_selections.append(selection)
 
@@ -39,7 +40,7 @@ def quiz():
 
     content = ""
 
-    while '::' not in content:
+    while content.count('::') != 1:
         data = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
