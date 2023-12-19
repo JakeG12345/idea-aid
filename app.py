@@ -4,14 +4,12 @@ from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 # from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import login_required, apology, datetime
+from helpers import login_required, apology, datetime, get_question_and_answers
 from openai import OpenAI
+
 client = OpenAI()
 
 app = Flask(__name__)
-
-# consists of tuples with format (question, answer)
-# quiz_selections = []
 
 db = SQL("sqlite:///db.db")
 
@@ -24,41 +22,20 @@ def index():
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
-    quiz_selections = []
-
     if request.method == "POST":
         selection = request.form.get("option")
-        print(selection)
-        # global quiz_selections
-        # quiz_selections.append(selection)
+        print("User selected option:", selection)
+        session["quiz_selections"][-1]["answer"] = selection
+    else:
+        session["quiz_selections"] = [] # dicts with format {question, answer}
 
-    pastSelections = ""
-    for selection in quiz_selections:
-        pastSelections = pastSelections + f" - Question: {selection[0]}, answer: {selection[1]}"
-    if pastSelections != "":
-        pastSelections = "Here are past question and answers: " + pastSelections
-
-    content = ""
-
-    while content.count('::') != 1:
-        data = client.chat.completions.create(
-            model="gpt-4-1106-preview",
-            messages=[
-                {
-                    "role": "user", 
-                    "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. It does this through a series of multiple choice questions that lead to a idea. For question {len(quiz_selections) + 1}, give me a question and a few answers. Remember, question should follow past questions to help lead into an idea for the user. Depending on how far along the question, the more or less specific it should be.{pastSelections}. IMPORTANT: You should return the question, followed by a '::' (without a space inbetween), followed by the possible answers comma separated without a space inbetween. In other words it should look like 'This is the question?::option 1, another option i guess' and you probably will have more options."
-                }
-            ]
-        )
-        content = data.choices[0].message.content
-        print("Content:", content)
-
-    print("Message:", content)
+    content = get_question_and_answers(session["quiz_selections"], client)
     
-    question, optionsD = data.choices[0].message.content.split("::")
+    question, optionsD = content.split("::")
+    session["quiz_selections"].append({"question": question})
     options = optionsD.split(",")
-    print("Quiz selections:", quiz_selections)
-    print("Options:", options)
+
+    print("Quiz selections:", session["quiz_selections"])
 
     return render_template("quiz.html", question=question, options=options)
 
