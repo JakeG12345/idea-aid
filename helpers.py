@@ -35,6 +35,23 @@ def get_question_and_answers(quiz_selections, client):
 
     return content
 
+def get_ideas(quiz_selections, client):
+    past_selections = get_past_selections_str(quiz_selections)
+
+    data = client.chat.completions.create(
+            model="gpt-4-1106-preview",
+            messages=[
+                {
+                    "role": "user",
+                    "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. It does this through a series of multiple choice questions that lead to an idea. I need you to give me some ideas.{past_selections}. IMPORTANT: You should return the possible ideas comma-separated without a space in between. In other words, it should look like 'idea 1,idea 2 word word,idea 3' you get the point."
+                }
+            ]
+        )
+    content = data.choices[0].message.content
+
+    return content.split(",")
+
+
 def get_past_selections_str(quiz_selections):
     past_selections = ""
 

@@ -4,7 +4,7 @@ from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 # from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import login_required, apology, datetime, get_question_and_answers
+from helpers import login_required, apology, datetime, get_question_and_answers, get_ideas
 from openai import OpenAI
 import secrets
 
@@ -35,6 +35,9 @@ def quiz():
         selections = session["quiz_selections"]
         selections[-1] = { "question": selections[-1]["question"], "answer": selection }
         session["quiz_selections"] = selections
+
+        if len(selections) >= QUESTIONS_BEFORE_IDEAS:
+            return redirect("/ideas")
     else:
         print("RESET QUIZ SELECTIONS")
         session["quiz_selections"] = []  # dicts with format {question, answer}
@@ -50,6 +53,12 @@ def quiz():
     print("Quiz selections (b):", session["quiz_selections"], len(session["quiz_selections"]))
 
     return render_template("quiz.html", question=question, options=options)
+
+
+@app.route("/ideas", methods=["GET"])
+def ideas():
+    ideas = get_ideas(session["quiz_selections"], client)
+    return render_template("ideas.html", ideas=ideas)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
