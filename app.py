@@ -42,13 +42,16 @@ def quiz():
 
     while content.count('::') != 1:
         data = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4-1106-preview",
             messages=[
-                {"role": "user", "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. It does this through a series of multiple choice questions that lead to a idea. For question {len(quiz_selections) + 1}, give me a question and a few answers. Remember, question should follow past questions to help lead into an idea for the user. Depending on how far along the question, the more or less specific it should be.{pastSelections}. IMPORTANT: You should return the question, followed by a '::' (without a space inbetween), followed by the possible answers comma separated without a space inbetween. In other words it should look like 'This is the question?::option 1, another option i guess' and you probably will have more options."
+                {
+                    "role": "user", 
+                    "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. It does this through a series of multiple choice questions that lead to a idea. For question {len(quiz_selections) + 1}, give me a question and a few answers. Remember, question should follow past questions to help lead into an idea for the user. Depending on how far along the question, the more or less specific it should be.{pastSelections}. IMPORTANT: You should return the question, followed by a '::' (without a space inbetween), followed by the possible answers comma separated without a space inbetween. In other words it should look like 'This is the question?::option 1, another option i guess' and you probably will have more options."
                 }
             ]
         )
         content = data.choices[0].message.content
+        print("Content:", content)
 
     print("Message:", content)
     
@@ -108,6 +111,5 @@ def login():
         session["user_id"] = user[0]["id"]
 
         return redirect("/")
-
     else:
         return render_template("login.html")
