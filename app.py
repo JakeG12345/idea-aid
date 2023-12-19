@@ -2,14 +2,11 @@ import os
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
-from flask_session import Session
+# from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required, apology, datetime, get_question_and_answers
 from openai import OpenAI
-<<<<<<< Updated upstream
-=======
 import secrets
->>>>>>> Stashed changes
 
 client = OpenAI()
 
@@ -18,33 +15,39 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.secret_key = secrets.token_hex(16)
 
-
 db = SQL("sqlite:///db.db")
+
+QUESTIONS_BEFORE_IDEAS = 8
 
 @app.route("/")
 @login_required
 def index():
     print(session["user_id"])
     # print(completion.choices[0].message)
-
-    return render_template("index.html")
+    return redirect("/quiz")
+    # return render_template("index.html")
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     if request.method == "POST":
         selection = request.form.get("option")
         print("User selected option:", selection)
-        session["quiz_selections"][-1]["answer"] = selection
+        selections = session["quiz_selections"]
+        selections[-1] = { "question": selections[-1]["question"], "answer": selection }
+        session["quiz_selections"] = selections
     else:
-        session["quiz_selections"] = [] # dicts with format {question, answer}
+        print("RESET QUIZ SELECTIONS")
+        session["quiz_selections"] = []  # dicts with format {question, answer}
+
+    print("Quiz selections (a):", session["quiz_selections"], len(session["quiz_selections"]))
 
     content = get_question_and_answers(session["quiz_selections"], client)
-    
+
     question, optionsD = content.split("::")
-    session["quiz_selections"].append({"question": question})
+    session["quiz_selections"].append({"question": question })
     options = optionsD.split(",")
 
-    print("Quiz selections:", session["quiz_selections"])
+    print("Quiz selections (b):", session["quiz_selections"], len(session["quiz_selections"]))
 
     return render_template("quiz.html", question=question, options=options)
 
@@ -93,14 +96,5 @@ def login():
             return apology('login', "Invalid username/ password")
         session["user_id"] = user[0]["id"]
         return redirect("/")
-<<<<<<< Updated upstream
     else:
         return render_template("login.html")
-=======
- 
-    else:
-        return render_template("login.html")
-    
-
-    #return render_template("quiz.html", question=question, options=options)
->>>>>>> Stashed changes
