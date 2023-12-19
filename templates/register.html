@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block main %}
-    <p class="errorMsg"><{{ message }}</p>
+    <p class="errorMsg">{{ message }}</p>
     <form action="/register" method="post">
         <div class="inputBtn">
-            <input class="form-control mx-auto w-auto" autocomplete="off" autofocus required id="username" name="usermame" placeholder="Username" type="text">
+            <input class="form-control mx-auto w-auto" autocomplete="off" autofocus required id="username" name="username" placeholder="Username" type="text">
         </div>
         <div class="inputBtn">
             <input class="form-control mx-auto w-auto" required id="password" name="password" placeholder="Password" type="password">

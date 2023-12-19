@@ -14,6 +14,7 @@ def login_required(f): # f is a function, the actual one that will be done like 
 
 def apology(page, message):
     page = page + ".html"
+<<<<<<< Updated upstream
     return render_template(page, message=message.title()) #renders the page it came from
 
 def get_question_and_answers(quiz_selections, client):
@@ -45,3 +46,8 @@ def get_past_selections_str(quiz_selections):
         return "Here are past question and answers: " + past_selections
     else:
         return ""
+=======
+    print(message)
+    message = message.title()
+    return render_template(page, message=message) #renders the page it came from
+>>>>>>> Stashed changes

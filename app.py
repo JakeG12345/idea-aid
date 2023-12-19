@@ -2,20 +2,29 @@ import os
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
-# from flask_session import Session
+from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required, apology, datetime, get_question_and_answers
 from openai import OpenAI
+<<<<<<< Updated upstream
+=======
+import secrets
+>>>>>>> Stashed changes
 
 client = OpenAI()
 
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+app.secret_key = secrets.token_hex(16)
+
 
 db = SQL("sqlite:///db.db")
 
 @app.route("/")
 @login_required
 def index():
+    print(session["user_id"])
     # print(completion.choices[0].message)
 
     return render_template("index.html")
@@ -48,19 +57,18 @@ def register():
         confirmation = request.form.get("confirmation")
 
         if not username:
-            return apology(__name__, "Username entry is required")
+             return apology('index', "Username entry is required")
         elif not password:
-            return apology(__name__, "Password entry is required")
+            return apology('index', "Password entry is required")
         elif password != confirmation:
-            return apology(__name__, "Password and confirmation do not match")
+            return apology('index', "Password and confirmation do not match")
         elif db.execute("SELECT username FROM users WHERE username = ?", username):
-            return apology(__name__, "Username in use")
-        # elif username: will have password conditions here (legth, numbers)
-        #     return apology(__name__, "")
-        else:
-            db.execute("INSERT INTO users (username, hash, date_created) VALUES(?, ?, ?)", username, generate_password_hash(password), datetime.datetime.now())
-            session["user_id"] = db.execute("SELECT id FROM users WHERE username = ?", username)
-            return redirect("/")
+            return apology('index', "Username in use")
+        # elif password: will have password conditions here (legth, numbers)
+        #     return apology('index', "")
+        db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)", username, generate_password_hash(password), datetime.datetime.now())
+        session["user_id"] = db.execute("SELECT id FROM users WHERE username = ?", username)
+        return redirect("/")
 
     else:
         return render_template("register.html")
@@ -74,19 +82,25 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
         if not username:
-            return apology(__name__, "Username entry is required")
+             return apology('login', "Username entry is required")
         elif not password:
-            return apology(__name__, "Password entry is required")
-        elif username in db.execute("SELECT username FROM users"):
-            return apology(__name__, "Username entry is required")
-        
-        user = db.execute("SELECT username, hash FROM users")
-        if not user:
-            return apology(__name__, "Invalid username")
-        elif check_password_hash(user[0]["hash"], password):
-            return apology(__name__, "Invalid username")
-        session["user_id"] = user[0]["id"]
+            return apology('login', "Password entry is required")
 
+
+        user = db.execute("SELECT id, username, hash FROM users WHERE username = ?", username)
+        print(f'user= {user}')
+        if not user or not check_password_hash(user[0]["hash"], password):
+            return apology('login', "Invalid username/ password")
+        session["user_id"] = user[0]["id"]
         return redirect("/")
+<<<<<<< Updated upstream
     else:
         return render_template("login.html")
+=======
+ 
+    else:
+        return render_template("login.html")
+    
+
+    #return render_template("quiz.html", question=question, options=options)
+>>>>>>> Stashed changes
