@@ -84,7 +84,7 @@ def register():
 
     else:
         return render_template("register.html")
-    
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -93,14 +93,16 @@ def login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+
         if not username:
              return apology('login', "Username entry is required")
-        elif not password:
+
+        if not password:
             return apology('login', "Password entry is required")
 
 
         user = db.execute("SELECT id, username, hash FROM users WHERE username = ?", username)
-        print(f'user= {user}')
+
         if not user or not check_password_hash(user[0]["hash"], password):
             return apology('login', "Invalid username/ password")
         session["user_id"] = user[0]["id"]
