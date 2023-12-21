@@ -7,11 +7,18 @@
 {% block main %}
     <div>
         {% for idea in ideas %}
-            <span>
-                <h2>{{ idea }}</h2>
-                <button>Expand on idea</button>
-                <button>Save idea</button>
-            </span>
+            <div class="mb-3">
+                <div class="btn-group dropend">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      {IDEA}
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                      <li><a class="dropdown-item" href="#">Menu item</a></li>
+                    </ul>
+                  </div>
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
