@@ -70,11 +70,12 @@ def register():
 
         if not username:
              return apology('index', "Username entry is required")
-        elif not password:
+        if not password:
             return apology('index', "Password entry is required")
-        elif password != confirmation:
+        if password != confirmation:
             return apology('index', "Password and confirmation do not match")
-        elif db.execute("SELECT username FROM users WHERE username = ?", username):
+        
+        if db.execute("SELECT username FROM users WHERE username = ?", username):
             return apology('index', "Username in use")
         # elif password: will have password conditions here (legth, numbers)
         #     return apology('index', "")
