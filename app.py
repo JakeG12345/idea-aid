@@ -70,15 +70,12 @@ def register():
 
         if not username:
              return apology('index', "Username entry is required")
-        if not password:
+        elif not password:
             return apology('index', "Password entry is required")
-        if password != confirmation:
+        elif password != confirmation:
             return apology('index', "Password and confirmation do not match")
-
-        if db.execute("SELECT username FROM users WHERE username = ?", username):
+        elif db.execute("SELECT username FROM users WHERE username = ?", username):
             return apology('index', "Username in use")
-
-            
         # elif password: will have password conditions here (legth, numbers)
         #     return apology('index', "")
         db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)", username, generate_password_hash(password), datetime.datetime.now())
@@ -104,11 +101,11 @@ def login():
             return apology('login', "Password entry is required")
 
 
-        user = db.execute("SELECT userID, username, hash FROM users WHERE username = ?", username)[0]
+        user = db.execute("SELECT id, username, hash FROM users WHERE username = ?", username)
 
-        if not user or not check_password_hash(user["hash"], password):
-            return apology('login', "Invalid username/password")
-        session["user_id"] = user["userID"]
+        if not user or not check_password_hash(user[0]["hash"], password):
+            return apology('login', "Invalid username/ password")
+        session["user_id"] = user[0]["id"]
         return redirect("/")
     else:
         return render_template("login.html")
