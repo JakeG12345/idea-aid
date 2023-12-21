@@ -74,9 +74,11 @@ def register():
             return apology('index', "Password entry is required")
         if password != confirmation:
             return apology('index', "Password and confirmation do not match")
-        
+
         if db.execute("SELECT username FROM users WHERE username = ?", username):
             return apology('index', "Username in use")
+
+            
         # elif password: will have password conditions here (legth, numbers)
         #     return apology('index', "")
         db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)", username, generate_password_hash(password), datetime.datetime.now())
