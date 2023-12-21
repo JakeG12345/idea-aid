@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Quiz
+Quiz
 {% endblock %}
 
 {% block main %}
+<div class="mb-3">
+    <h1>{{ question }}</h1>
+</div>
+<form action="/quiz" method="post">
     <div class="mb-3">
-        <h1>{{ question }}</h1>
+        {% for option in options %}
+        <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
+            {{ option }}
+        </button>
+        {% endfor %}
     </div>
-    <form action="/quiz" method="post">
-        <div class="mb-3">
-            {% for option in options %}
-                <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
-                    {{ option }}
-                </button>
-            {% endfor %}
-        </div>
-    </form>
+</form>
 {% endblock %}

@@ -1,23 +1,24 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Ideas
+Ideas
 {% endblock %}
 
 {% block main %}
-    <div>
-        {% for idea in ideas %}
-            <div class="mb-3">
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      {{ idea }}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Save</a></li>
-                        <li><a class="dropdown-item" href="#">Expand</a></li>
-                    </ul>
-                </div>
-            </div>
-        {% endfor %}
+<div>
+    {% for idea in ideas %}
+    <div class="mb-3">
+        <div class="btn-group">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{ idea }}
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Save</a></li>
+                <li><a class="dropdown-item" href="#">Expand</a></li>
+            </ul>
+        </div>
     </div>
+    {% endfor %}
+</div>
 {% endblock %}
