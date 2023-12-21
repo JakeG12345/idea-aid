@@ -101,7 +101,7 @@ def login():
             return apology('login', "Password entry is required")
 
 
-        user = db.execute("SELECT id, username, hash FROM users WHERE username = ?", username)
+        user = db.execute("SELECT userID, username, hash FROM users WHERE username = ?", username)
 
         if not user or not check_password_hash(user[0]["hash"], password):
             return apology('login', "Invalid username/ password")
