@@ -101,11 +101,11 @@ def login():
             return apology('login', "Password entry is required")
 
 
-        user = db.execute("SELECT userID, username, hash FROM users WHERE username = ?", username)
+        user = db.execute("SELECT userID, username, hash FROM users WHERE username = ?", username)[0]
 
-        if not user or not check_password_hash(user[0]["hash"], password):
-            return apology('login', "Invalid username/ password")
-        session["user_id"] = user[0]["id"]
+        if not user or not check_password_hash(user["hash"], password):
+            return apology('login', "Invalid username/password")
+        session["user_id"] = user["userID"]
         return redirect("/")
     else:
         return render_template("login.html")
