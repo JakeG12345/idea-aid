@@ -7,15 +7,15 @@
 {% block main %}
     <p class="errorMsg">{{ message }}</p>
     <form action="/register" method="post">
-        <div class="inputBtn">
+        <div class="mb-3">
             <input class="form-control mx-auto w-auto" autocomplete="off" autofocus required id="username" name="username" placeholder="Username" type="text">
         </div>
-        <div class="inputBtn">
+        <div class="mb-3">
             <input class="form-control mx-auto w-auto" required id="password" name="password" placeholder="Password" type="password">
         </div>
-        <div class="inputBtn">
+        <div class="mb-3">
             <input class="form-control mx-auto w-auto" required id="confirmation" name="confirmation" placeholder="Confirmation" type="password">
         </div>
-        <button class="submitBtn" type="submit">Register</button>
+        <button class="btn btn-primary" type="submit">Register</button>
     </form>
 {% endblock %}
