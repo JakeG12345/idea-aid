@@ -1,9 +1,17 @@
-<div>
-    {% for idea in ideas %}
-        <span>
-            <h2>{{ idea }}</h2>
-            <button>Expand on idea</button>
-            <button>Save idea</button>
-        </span>
-    {% endfor %}
-</div>
+{% extends "layout.html" %}
+
+{% block title %}
+    Generator
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% for idea in ideas %}
+            <span>
+                <h2>{{ idea }}</h2>
+                <button>Expand on idea</button>
+                <button>Save idea</button>
+            </span>
+        {% endfor %}
+    </div>
+{% endblock %}
