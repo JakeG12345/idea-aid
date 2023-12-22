@@ -19,6 +19,7 @@ db = SQL("sqlite:///db.db")
 
 QUESTIONS_BEFORE_IDEAS = 8
 
+
 @app.route("/")
 @login_required
 def index():
@@ -27,13 +28,15 @@ def index():
     return redirect("/quiz")
     # return render_template("index.html")
 
+
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
     if request.method == "POST":
         selection = request.form.get("option")
         print("User selected option:", selection)
         selections = session["quiz_selections"]
-        selections[-1] = { "question": selections[-1]["question"], "answer": selection }
+        selections[-1] = {"question": selections[-1]
+                          ["question"], "answer": selection}
         session["quiz_selections"] = selections
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
@@ -42,15 +45,17 @@ def quiz():
         print("RESET QUIZ SELECTIONS")
         session["quiz_selections"] = []  # dicts with format {question, answer}
 
-    print("Quiz selections (a):", session["quiz_selections"], len(session["quiz_selections"]))
+    print("Quiz selections (a):", session["quiz_selections"], len(
+        session["quiz_selections"]))
 
     content = get_question_and_answers(session["quiz_selections"], client)
 
     question, optionsD = content.split("::")
-    session["quiz_selections"].append({"question": question })
+    session["quiz_selections"].append({"question": question})
     options = optionsD.split(",")
 
-    print("Quiz selections (b):", session["quiz_selections"], len(session["quiz_selections"]))
+    print("Quiz selections (b):", session["quiz_selections"], len(
+        session["quiz_selections"]))
 
     return render_template("quiz.html", question=question, options=options)
 
@@ -59,6 +64,12 @@ def quiz():
 def ideas():
     ideas = get_ideas(session["quiz_selections"], client)
     return render_template("ideas.html", ideas=ideas)
+
+
+@app.route("/save", methods=["POST"])
+def save():
+    return redirect(ideas)
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -69,7 +80,7 @@ def register():
         confirmation = request.form.get("confirmation")
 
         if not username:
-             return apology('index', "Username entry is required")
+            return apology('index', "Username entry is required")
         elif not password:
             return apology('index', "Password entry is required")
         elif password != confirmation:
@@ -78,8 +89,10 @@ def register():
             return apology('index', "Username in use")
         # elif password: will have password conditions here (legth, numbers)
         #     return apology('index', "")
-        db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)", username, generate_password_hash(password), datetime.datetime.now())
-        session["user_id"] = db.execute("SELECT id FROM users WHERE username = ?", username)
+        db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)",
+                   username, generate_password_hash(password), datetime.datetime.now())
+        session["user_id"] = db.execute(
+            "SELECT id FROM users WHERE username = ?", username)
         return redirect("/")
 
     else:
@@ -95,13 +108,13 @@ def login():
         password = request.form.get("password")
 
         if not username:
-             return apology('login', "Username entry is required")
+            return apology('login', "Username entry is required")
 
         if not password:
             return apology('login', "Password entry is required")
 
-
-        user = db.execute("SELECT id, username, hash FROM users WHERE username = ?", username)
+        user = db.execute(
+            "SELECT id, username, hash FROM users WHERE username = ?", username)
 
         if not user or not check_password_hash(user[0]["hash"], password):
             return apology('login', "Invalid username/ password")
