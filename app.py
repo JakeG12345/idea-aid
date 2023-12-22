@@ -1,8 +1,9 @@
 import os
+import re
 
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
-# from flask_session import Session
+from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required, apology, datetime, get_question_and_answers, get_ideas
 from openai import OpenAI
@@ -21,15 +22,12 @@ QUESTIONS_BEFORE_IDEAS = 8
 
 
 @app.route("/")
-@login_required
 def index():
-    print(session["user_id"])
-    # print(completion.choices[0].message)
-    return redirect("/quiz")
-    # return render_template("index.html")
+    return render_template("index.html")
 
 
 @app.route("/quiz", methods=["GET", "POST"])
+@login_required
 def quiz():
     if request.method == "POST":
         selection = request.form.get("option")
@@ -61,12 +59,14 @@ def quiz():
 
 
 @app.route("/ideas", methods=["GET"])
+@login_required
 def ideas():
     ideas = get_ideas(session["quiz_selections"], client)
     return render_template("ideas.html", ideas=ideas)
 
 
 @app.route("/save", methods=["POST"])
+@login_required
 def save():
     return redirect(ideas)
 
@@ -80,17 +80,25 @@ def register():
         confirmation = request.form.get("confirmation")
 
         if not username:
-            return apology('index', "Username entry is required")
+            return apology('register', "Username entry is required")
         elif not password:
-            return apology('index', "Password entry is required")
+            return apology('register', "Password entry is required")
         elif password != confirmation:
-            return apology('index', "Password and confirmation do not match")
+            return apology('register', "Password and confirmation do not match")
         elif db.execute("SELECT username FROM users WHERE username = ?", username):
-            return apology('index', "Username in use")
-        # elif password: will have password conditions here (legth, numbers)
-        #     return apology('index', "")
+            return apology('register', "Username in use")
+        
+        elif len(password) < 8:
+            return apology('register', "password must be at least 8 characters")
+        elif not re.search(r'[A-Z]', password):
+            return apology('register', "password must contain a capital letter")
+        elif not re.search(r'[a-z]', password):
+            return apology('register', "password must contain a lowercase letter")
+        elif not re.search(r'\d', password):
+            return apology('register', "password must contain a digit")
+        
         db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)",
-                   username, generate_password_hash(password), datetime.datetime.now())
+            username, generate_password_hash(password), datetime.datetime.now())
         session["user_id"] = db.execute(
             "SELECT userID FROM users WHERE username = ?", username)
         return redirect("/")

@@ -1,8 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Charter:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+
+@font-face {
+    font-family: Nanum-Gothic;
+    src: url('NanumGothic-Regular.ttf') format('truetype');
+}
+
 h1 {
-    font-family: "Nanum Gothic";
+    font-family: "Poppins";
+    letter-spacing: 3px;
+    font-size: 100px;
+}
+
+p {
+    font-family: "Raleway";
 }
 
 .errorMsg {
     color: red;
     font-weight: bold;
+}
+
+#nav-logo {
+    width: 17.79vw;
+    height: 4.2vw;
+}
+
+nav {
+    background-color: #E0E9E0;
+}
+
+input {
+    background-color: red;
+}
+
+button {
+    background-color: red;
 }
