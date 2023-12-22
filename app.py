@@ -92,7 +92,7 @@ def register():
         db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)",
                    username, generate_password_hash(password), datetime.datetime.now())
         session["user_id"] = db.execute(
-            "SELECT id FROM users WHERE username = ?", username)
+            "SELECT userID FROM users WHERE username = ?", username)
         return redirect("/")
 
     else:
@@ -114,11 +114,11 @@ def login():
             return apology('login', "Password entry is required")
 
         user = db.execute(
-            "SELECT id, username, hash FROM users WHERE username = ?", username)
+            "SELECT userID, username, hash FROM users WHERE username = ?", username)
 
         if not user or not check_password_hash(user[0]["hash"], password):
             return apology('login', "Invalid username/ password")
-        session["user_id"] = user[0]["id"]
+        session["user_id"] = user[0]["userID"]
         return redirect("/")
     else:
         return render_template("login.html")

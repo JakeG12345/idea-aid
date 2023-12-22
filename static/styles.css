@@ -1,0 +1,8 @@
+h1 {
+    font-family: "Nanum Gothic";
+}
+
+.errorMsg {
+    color: red;
+    font-weight: bold;
+}
