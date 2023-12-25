@@ -14,6 +14,11 @@ h1 {
     font-size: 120px;
 }
 
+question {
+    font-family: "Roboto Mono", monospace;
+    font-weight: bold;
+    font-size: 30px;
+}
 p {
     font-family: "Charter";
 }

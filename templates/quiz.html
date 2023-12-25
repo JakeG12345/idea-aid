@@ -32,18 +32,18 @@ Quiz
             </div>
             {% endfor %}
         </div>
-        
+
         <script>
             function submitForm(action, idea) {
                 const form = document.createElement('form');
                 form.method = 'post';
                 form.action = action;
-        
+
                 const input = document.createElement('input');
                 input.type = 'hidden';
                 input.name = 'idea';
                 input.value = idea;
-        
+
                 form.appendChild(input);
                 document.body.appendChild(form);
                 form.submit();
@@ -69,7 +69,7 @@ Quiz
     {% for selection in previous_selections %}
         <div>
             <div class="mb-3">
-                <h1>{{ selection["question"] }}</h1>
+                <question>{{ selection["question"] }}</question>
             </div>
             <form>
                 <div class="mb-3">
