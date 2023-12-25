@@ -33,7 +33,7 @@ def quiz():
         selected_option = request.form.get("option")
         selections = session["quiz_selections"]
         selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": selections[-1]["options"]}
-        
+
         session["quiz_selections"] = selections
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
@@ -69,7 +69,7 @@ def register():
             return apology('register', "Password and confirmation do not match")
         elif db.execute("SELECT username FROM users WHERE username = ?", username):
             return apology('register', "Username in use")
-        
+
         elif len(password) < 8:
             return apology('register', "password must be at least 8 characters")
         elif not re.search(r'[A-Z]', password):
@@ -78,7 +78,7 @@ def register():
             return apology('register', "password must contain a lowercase letter")
         elif not re.search(r'\d', password):
             return apology('register', "password must contain a digit")
-        
+
         db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)",
             username, generate_password_hash(password), datetime.datetime.now())
         session["user_id"] = db.execute(
@@ -114,11 +114,11 @@ def login():
         return render_template("login.html")
 
 @app.route("/expand", methods=["GET", "POST"])
-# @login_required
+@login_required
 def expand():
     if not request.form.__contains__("idea"):
         return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
-    
+
     idea = request.form.get("idea")
     expansion, similars = expand_idea(idea, client)
     return render_template("expand.html", idea=idea, expansion=expansion, similar_ideas=similars)
