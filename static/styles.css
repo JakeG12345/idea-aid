@@ -14,7 +14,7 @@ h1 {
     font-size: 120px;
 }
 
-question {
+h1.question {
     font-family: "Roboto Mono", monospace;
     font-weight: bold;
     font-size: 30px;
