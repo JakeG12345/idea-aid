@@ -17,8 +17,16 @@ Quiz
                         {{ idea }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#" onclick="submitForm('/save', '{{ idea }}')">Save</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="submitForm('/expand', '{{ idea }}')">Expand</a></li>
+                        <li>
+                            <button class="dropdown-item" onclick="submitForm('/save', '{{ idea }}')">
+                                Save
+                            </button>
+                        </li>
+                        <li>
+                            <button class="dropdown-item" onclick="submitForm('/expand', '{{ idea }}')">
+                                Expand
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
