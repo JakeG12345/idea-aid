@@ -31,9 +31,10 @@ def get_question_and_answers(quiz_selections, client):
             ]
         )
         content = data.choices[0].message.content
-        print("Content:", content)
 
-    return content
+    question, optionsD = content.split("::")
+    options = optionsD.split(",")
+    return question, options
 
 def get_ideas(quiz_selections, client):
     past_selections = get_past_selections_str(quiz_selections)

@@ -28,30 +28,20 @@ def index():
 @login_required
 def quiz():
     if request.method == "POST":
-        selection = request.form.get("option")
-        print("User selected option:", selection)
+        # add selected option to selections session data
+        selected_option = request.form.get("option")
         selections = session["quiz_selections"]
-        selections[-1] = {"question": selections[-1]
-                          ["question"], "answer": selection}
+        selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": selections[-1]["options"]}
+        
         session["quiz_selections"] = selections
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
             return redirect("/ideas")
     else:
-        print("RESET QUIZ SELECTIONS")
-        session["quiz_selections"] = []  # dicts with format {question, answer}
+        session["quiz_selections"] = []  # dicts with format {question, answer} - set to empty everytime start quiz (GET page)
 
-    print("Quiz selections (a):", session["quiz_selections"], len(
-        session["quiz_selections"]))
-
-    content = get_question_and_answers(session["quiz_selections"], client)
-
-    question, optionsD = content.split("::")
-    session["quiz_selections"].append({"question": question})
-    options = optionsD.split(",")
-
-    print("Quiz selections (b):", session["quiz_selections"], len(
-        session["quiz_selections"]))
+    question, options = get_question_and_answers(session["quiz_selections"], client)
+    session["quiz_selections"].append({"question": question, "options": options})
 
     return render_template("quiz.html", question=question, options=options)
 
