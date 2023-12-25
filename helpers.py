@@ -63,3 +63,27 @@ def get_past_selections_str(quiz_selections):
         return " Here are past question and answers: " + past_selections
     else:
         return ""
+    
+def expand_idea(idea, client):
+    data = client.chat.completions.create(
+        model="gpt-4-1106-preview",
+        messages=[
+            {
+                "role": "user",
+                "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. Please elaborate on this idea: {idea}. IMPORTANT: You should return just the text that answers the question."
+            },
+        ]
+    )
+    data2 = client.chat.completions.create(
+        model="gpt-4-1106-preview",
+        messages=[
+            {
+                "role": "user",
+                "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. You have just given me this idea: {idea}. Please provide me with some similar ideas. IMPORTANT: You should return the possible ideas comma-separated. In other words, it should look like 'idea 1,idea 2 word word,idea 3' you get the point."
+            }
+        ]
+    )
+            
+    expansion = data.choices[0].message.content
+    similars = data2.choices[0].message.content.split(",")
+    return expansion, similars

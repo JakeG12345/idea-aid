@@ -7,5 +7,53 @@ More About Idea
 {% block main %}
 <div>
     <h1>{{ idea }}</h1>
+    <div style="display: flex;">
+        <div>
+            <p>
+                {{ expansion }}
+            </p>
+        </div>
+        <div>
+            <h2>Similar Ideas</h2>
+            {% for idea in similar_ideas %}
+                <div class="mb-3">
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ idea }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <button class="dropdown-item" onclick="submitForm('/save', '{{ idea }}')">
+                                    Save
+                                </button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" onclick="submitForm('/expand', '{{ idea }}')">
+                                    Expand
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            {% endfor %}
+            <script>
+                function submitForm(action, idea) {
+                    const form = document.createElement('form');
+                    form.method = 'post';
+                    form.action = action;
+            
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'idea';
+                    input.value = idea;
+            
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            </script>
+        </div>
+    </div>
 </div>
 {% endblock %}

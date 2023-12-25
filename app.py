@@ -4,7 +4,7 @@ import re
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
-from helpers import login_required, apology, datetime, get_question_and_answers, get_ideas
+from helpers import login_required, apology, datetime, get_question_and_answers, get_ideas, expand_idea
 from openai import OpenAI
 import secrets
 
@@ -16,6 +16,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
+
+# JG V1
 
 QUESTIONS_BEFORE_IDEAS = 5
 
@@ -118,7 +120,8 @@ def expand():
         return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
     
     idea = request.form.get("idea")
-    return render_template("expand.html", idea=idea)
+    expansion, similars = expand_idea(idea, client)
+    return render_template("expand.html", idea=idea, expansion=expansion, similar_ideas=similars)
 
 @app.errorhandler(404)
 def page_not_found(e):
