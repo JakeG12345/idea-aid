@@ -43,7 +43,7 @@ def quiz():
     question, options = get_question_and_answers(session["quiz_selections"], client)
     session["quiz_selections"].append({"question": question, "options": options})
 
-    return render_template("quiz.html", question=question, options=options)
+    return render_template("quiz.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]))
 
 
 @app.route("/ideas", methods=["GET"])
