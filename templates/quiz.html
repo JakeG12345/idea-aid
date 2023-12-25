@@ -6,33 +6,73 @@ Quiz
 
 {% block main %}
 <div>
-    <div class="mb-3">
-        <h1>{{ current_selection["question"] }}</h1>
-    </div>
-    <form action="/quiz" method="post">
-        <div class="mb-3">
-            {% for option in current_selection["options"] %}
-            <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
-                {{ option }}
-            </button>
+    {% if has_ideas %}
+        <div>
+            <h2>Here's What We Came Up With:</h2>
+            {% for idea in ideas %}
+            <div class="mb-3">
+                <div class="btn-group">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ idea }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" onclick="submitForm('/save', '{{ idea }}')">Save</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="submitForm('/expand', '{{ idea }}')">Expand</a></li>
+                    </ul>
+                </div>
+            </div>
             {% endfor %}
         </div>
-    </form>
-    
-    {% for selection in previous_selections %}
-        <div class="mb-3">
-            <h1>{{ selection["question"] }}</h1>
-        </div>
-        <form>
+        
+        <script>
+            function submitForm(action, idea) {
+                const form = document.createElement('form');
+                form.method = 'post';
+                form.action = action;
+        
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'idea';
+                input.value = idea;
+        
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        </script>
+    {% else %}
+        <div>
             <div class="mb-3">
-                {% for option in selection["options"] %}
-                <button class="btn btn-primary" type="submit" disabled name="option" value="{{ option }}">
-                    {{ option }}
-                </button>
-                {% endfor %}
+                <h1>{{ current_selection["question"] }}</h1>
             </div>
-        </form>
-</div>
+            <form action="/quiz" method="post">
+                <div class="mb-3">
+                    {% for option in current_selection["options"] %}
+                    <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
+                        {{ option }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    {% endif %}
 
-{% endfor %}
+    {% for selection in previous_selections %}
+        <div>
+            <div class="mb-3">
+                <h1>{{ selection["question"] }}</h1>
+            </div>
+            <form>
+                <div class="mb-3">
+                    {% for option in selection["options"] %}
+                    <button class="btn btn-primary" type="submit" disabled name="option" value="{{ option }}">
+                        {{ option }}
+                    </button>
+                    {% endfor %}
+                </div>
+            </form>
+        </div>
+    {% endfor %}
+</div>
 {% endblock %}

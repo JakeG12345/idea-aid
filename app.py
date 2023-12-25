@@ -35,30 +35,30 @@ def quiz():
         session["quiz_selections"] = selections
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
-            return redirect("/ideas")
+            ideas = get_ideas(selections, client)
+            return render_template("quiz.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True)
     else:
         session["quiz_selections"] = []  # dicts with format {question, answer} - set to empty everytime start quiz (GET page)
 
     question, options = get_question_and_answers(session["quiz_selections"], client)
     session["quiz_selections"].append({"question": question, "options": options})
 
-    return render_template("quiz.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]))
+    return render_template("quiz.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
 
 
-@app.route("/ideas", methods=["GET"])
-@login_required
-def ideas():
-    # if not session.__contains__("quiz_selection"):
-    #     return render_template("error.html", header="no questions have been answered")
+# @app.route("/ideas", methods=["GET"])
+# @login_required
+# def ideas():
+#     # if not session.__contains__("quiz_selection"):
+#     #     return render_template("error.html", header="no questions have been answered")
 
-    ideas = get_ideas(session["quiz_selections"], client)
-    return render_template("ideas.html", ideas=ideas)
+#     return render_template("ideas.html", ideas=ideas)
 
 
 @app.route("/save", methods=["POST"])
 @login_required
 def save():
-    return redirect(ideas)
+    return redirect("/")
 
 
 @app.route("/register", methods=["GET", "POST"])
