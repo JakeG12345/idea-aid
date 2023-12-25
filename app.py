@@ -45,16 +45,6 @@ def quiz():
 
     return render_template("quiz.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
 
-
-# @app.route("/ideas", methods=["GET"])
-# @login_required
-# def ideas():
-#     # if not session.__contains__("quiz_selection"):
-#     #     return render_template("error.html", header="no questions have been answered")
-
-#     return render_template("ideas.html", ideas=ideas)
-
-
 @app.route("/save", methods=["POST"])
 @login_required
 def save():
