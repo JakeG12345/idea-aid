@@ -59,6 +59,9 @@ def quiz():
 @app.route("/ideas", methods=["GET"])
 @login_required
 def ideas():
+    # if not session.__contains__("quiz_selection"):
+    #     return render_template("error.html", header="no questions have been answered")
+
     ideas = get_ideas(session["quiz_selections"], client)
     return render_template("ideas.html", ideas=ideas)
 
@@ -128,3 +131,7 @@ def login():
         return redirect("/")
     else:
         return render_template("login.html")
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("error.html", header="404", message="Page not found")
