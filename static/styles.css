@@ -1,6 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Charter:wght@600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
+
 
 @font-face {
     font-family: Nanum-Gothic;
@@ -8,13 +9,13 @@
 }
 
 h1 {
-    font-family: "Poppins";
-    letter-spacing: 3px;
-    font-size: 100px;
+    font-family: "Roboto Mono", monospace;
+    font-weight: bold;
+    font-size: 120px;
 }
 
 p {
-    font-family: "Raleway";
+    font-family: "Charter";
 }
 
 .errorMsg {
@@ -23,8 +24,19 @@ p {
 }
 
 #nav-logo {
-    width: 17.79vw;
-    height: 4.2vw;
+    width: 16.94vw;
+    height: 4vw;
+    margin-left: 0vw;
+}
+
+.nav-item {
+    margin: 0.06vw 1.5vw 0.06vw 0.4vw;
+    font-size: larger;
+}
+
+.nav-item:hover {
+    margin: 0vw 1.44vw 0vw 0.34vw;
+    border: 0.06vw solid #3E424B;
 }
 
 nav {
@@ -35,6 +47,14 @@ input {
     background-color: red;
 }
 
-button {
-    background-color: red;
+ul {
+    display: flex;
+}
+
+.btn {
+    background-color: blue;
+}
+
+.nav-link {
+    color: #604B4C;
 }

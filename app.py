@@ -17,12 +17,11 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-QUESTIONS_BEFORE_IDEAS = 5
+QUESTIONS_BEFORE_IDEAS = 1
 
 @app.route("/")
 def index():
     return render_template("index.html")
-
 
 @app.route("/quiz", methods=["GET", "POST"])
 @login_required

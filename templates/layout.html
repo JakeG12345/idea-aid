@@ -25,18 +25,21 @@
 <body>
 
     <nav class="border navbar navbar-expand-md sticky-top">
-        <div class="collapse navbar-collapse" id="navbar">           
+        <div class="collapse navbar-collapse container-fluid" id="navbar">           
             {% if session["user_id"] %}
-            <a class="nav-logo" href="/index"><img id="nav-logo"src="/static/logo.png"></a>
+            <a class="nav-item" href="/index"><img id="nav-logo"src="/static/logo.png"></a>
             <ul class="navbar-nav me-auto mt-2">
-                <li class="nav-item"><a class="nav-link" href="/quiz">Generate New Ideas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
                 <li class="nav-item"><a class="nav-link" href="/saved">Your Ideas</a></li>
             </ul>
             <ul class="navbar-nav ms-auto mt-2">
                 <li class="nav-item"><a class="nav-link" href="/login">Log Out</a></li>
             </ul>
             {% else %}
-            <img id="nav-logo"src="/static/logo.png">
+            <a class="nav-item" href="/index"><img id="nav-logo"src="/static/logo.png"></a>
+            <ul class="navbar-nav me-auto mt-2">
+                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
+            </ul>
             <ul class="navbar-nav ms-auto mt-2">
                 <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
                 <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
