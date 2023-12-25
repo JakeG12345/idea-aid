@@ -24,7 +24,7 @@ def index():
     return render_template("index.html")
 
 @app.route("/quiz", methods=["GET", "POST"])
-@login_required
+# @login_required
 def quiz():
     if request.method == "POST":
         # add selected option to selections session data
@@ -110,6 +110,15 @@ def login():
         return redirect("/")
     else:
         return render_template("login.html")
+
+@app.route("/expand", methods=["GET", "POST"])
+# @login_required
+def expand():
+    if not request.form.__contains__("idea"):
+        return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
+    
+    idea = request.form.get("idea")
+    return render_template("expand.html", idea=idea)
 
 @app.errorhandler(404)
 def page_not_found(e):
