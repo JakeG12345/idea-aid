@@ -17,7 +17,7 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-QUESTIONS_BEFORE_IDEAS = 1
+QUESTIONS_BEFORE_IDEAS = 5
 
 @app.route("/")
 def index():
