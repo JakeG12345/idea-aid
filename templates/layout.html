@@ -38,19 +38,19 @@
                 {% endif %}
             </ul>
         </nav>
-        <div id="hamburger-icon" onclick="toggileMobileMenu(this)">
+        <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
             <ul class="mobile-menu">
                 {% if session["user_id"] %}   
-                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
-                <li class="nav-item"><a class="nav-link" href="/save">Your Ideas</a></li>
-                <li class="nav-item"><a class="nav-link" href="/login">Log Out</a></li>
+                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/quiz">Generator</a></li>
+                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/save">Your Ideas</a></li>
+                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/login">Log Out</a></li>
                 {% else %}
-                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
-                <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
-                <li class="nav-item"><a class="nav-link" href="/login">Log In</a></li>
+                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/quiz">Generator</a></li>
+                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/register">Register</a></li>
+                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/login">Log In</a></li>
                 {% endif %}
             </ul>
         </div>
