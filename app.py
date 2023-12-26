@@ -120,7 +120,7 @@ def save():
         dt = datetime.now()
         formattedTime = dt.strftime("%Y-%m-%d %H:%M:%S")
 
-        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", session["user_id"], idea, formatedTime)
+        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", session["user_id"], idea, formattedTime)
 
     return render_template("saved.html")
 
