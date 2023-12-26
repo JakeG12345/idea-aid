@@ -24,12 +24,12 @@ More About Idea
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <button class="dropdown-item" onclick="submitForm('/save', '{{ idea }}')">
+                                <button class="dropdown-item" data-name="{{ idea }}">
                                     Save
                                 </button>
                             </li>
                             <li>
-                                <button class="dropdown-item" onclick="submitForm('/expand', '{{ idea }}')">
+                                <button class="dropdown-item" data-name="{{ idea }}">
                                     Expand
                                 </button>
                             </li>
