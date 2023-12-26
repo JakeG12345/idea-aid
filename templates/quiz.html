@@ -17,15 +17,13 @@ Quiz
                         {{ idea }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li>
+                        <li class="dropdown-item">
                             <button class="dropdown-item" onclick="submitForm('/save', '{{ idea }}')">
                                 Save
                             </button>
                         </li>
-                        <li>
-                            <button class="dropdown-item" onclick="submitForm('/expand', '{{ idea }}')">
-                                Expand
-                            </button>
+                        <li class="dropdown-item" data-name="{{ stock.name }}">
+                            Expand
                         </li>
                     </ul>
                 </div>
@@ -43,7 +41,7 @@ Quiz
 
                     var input = document.createElement('input');
                     input.type = 'hidden';
-                    input.name = 'idea';
+                    input.name = 'remove';
                     input.value = target.parentNode.dataset.name;
 
                     form.appendChild(input);
