@@ -32,24 +32,23 @@ Quiz
         <script>
             docuemnt.addEventListener("DOMContentLoaded", (event) => {
                 buttons = document.querySelectorAll("li.dropdown-menu");
-
-                document.addEventListener('click', function (event) {
-                    var target = event.target;
-                    if (target.tagName.toLowerCase() === 'td' && target.parentNode.dataset.name) {
+                buttons.forEach((button) => {
+                    button.addEventListener('click', function (event) {
                         var form = document.createElement('form');
                         form.method = 'post';
-                        form.action = '/expand';
 
+                        
+
+                        form.action = '/expand';
                         var input = document.createElement('input');
                         input.type = 'hidden';
                         input.name = 'remove';
                         input.value = target.parentNode.dataset.name;
-
                         form.appendChild(input);
                         document.body.appendChild(form);
                         form.submit();
-                    }
-                });
+                    });
+                })
             });
 
         </script>
