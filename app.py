@@ -87,7 +87,6 @@ def register():
         userID = db.execute(
             "SELECT userID FROM users WHERE username = ?", username)
         session["user_id"] = userID[0]["userID"]
-        print(session["user_id"])
         return redirect("/")
 
     else:
