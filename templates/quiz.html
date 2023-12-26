@@ -67,10 +67,19 @@ Quiz
             <form action="/quiz" method="post">
                 <div class="mb-3">
                     {% for option in current_selection["options"] %}
-                    <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
-                        {{ option }}
-                    </button>
-                    {% endfor %}
+                        <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
+                            {{ option }}
+                        </button>
+                    {% endfor %}         
+                </div>
+            </form>
+            <form action="/quiz" method="post">
+                <div class="mt-3 mx-auto" style="display: flex; width: 80vw; gap: 30px;">
+                    <input class="form-control" name="custom" required
+                        placeholder="Add custom answer" type="text">
+                    <button class="btn btn-primary" style="width: 300px;" type="submit">
+                        Submit Custom Option
+                    </button>       
                 </div>
             </form>
         </div>

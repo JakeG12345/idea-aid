@@ -31,11 +31,18 @@ def index():
 def quiz():
     if request.method == "POST":
         # add selected option to selections session data
-        selected_option = request.form.get("option")
         selections = session["quiz_selections"]
-        selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": selections[-1]["options"]}
 
-        session["quiz_selections"] = selections
+        if request.form.get("custom") != "":
+            selected_option = request.form.get("custom")
+            options = selections[-1]["options"]
+            options.append(selected_option)
+            selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": options}
+            session["quiz_selections"] = selections
+        else:
+            selected_option = request.form.get("option")
+            selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": selections[-1]["options"]}
+            session["quiz_selections"] = selections
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
             ideas = get_ideas(selections, client)
