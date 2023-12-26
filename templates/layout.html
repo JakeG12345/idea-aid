@@ -54,6 +54,10 @@
                 {% endif %}
             </ul>
         </div>
+    </nav>
+
+    <header class="text-center">
+        {% block header %}{% endblock %}
         <script>
             function toggleMobileMenu(menu) {
                 menu.classList.toggle('open'); 
@@ -61,7 +65,7 @@
         </script>
     </header>
 
-    <main class="container-fluid py-5 text-center">
+    <main class="container-fluid text-center">
         {% block main %}{% endblock %}
     </main>
 </body>

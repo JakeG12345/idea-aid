@@ -3,7 +3,7 @@ import re
 
 from datetime import datetime
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required, apology, datetime, get_question_and_answers, get_ideas, expand_idea
 from openai import OpenAI
@@ -20,15 +20,19 @@ db = SQL("sqlite:///db.db")
 
 # Bug fix v2
 
-QUESTIONS_BEFORE_IDEAS = 5
+QUESTIONS_BEFORE_IDEAS = 6
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/quiz", methods=["GET", "POST"])
-@login_required
+@app.route("/quiz")
 def quiz():
+    return redirect("/generator")
+
+@app.route("/generator", methods=["GET", "POST"])
+@login_required
+def generator():
     if request.method == "POST":
         # add selected option to selections session data
         selections = session["quiz_selections"]
