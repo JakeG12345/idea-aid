@@ -32,14 +32,14 @@ Quiz
             </div>
             {% endfor %}
         </div>
-        
+
         <script>
             document.addEventListener('click', function (event) {
                 var target = event.target;
                 if (target.tagName.toLowerCase() === 'td' && target.parentNode.dataset.name) {
                     var form = document.createElement('form');
                     form.method = 'post';
-                    form.action = '/quote';
+                    form.action = '/expand';
 
                     var input = document.createElement('input');
                     input.type = 'hidden';
