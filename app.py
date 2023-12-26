@@ -18,7 +18,7 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-# Version includes resolved changes from Jake's issue on 26/12/2023
+# Version includes resolved changes from Jake's issue on 26/12/2023 - 23:33
 
 QUESTIONS_BEFORE_IDEAS = 6
 
