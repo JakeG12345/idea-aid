@@ -18,7 +18,7 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-# Fixed Expand and Save buttons
+# Bug fix v1
 
 QUESTIONS_BEFORE_IDEAS = 5
 
@@ -113,7 +113,7 @@ def login():
 @login_required
 def save():
     uid = session["user_id"]
-    if request.form.method == "POST":
+    if request.method == "POST":
         if not request.form.__contains__("idea"):
             return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
 
