@@ -30,23 +30,26 @@ Quiz
         </div>
 
         <script>
-            document.addEventListener('click', function (event) {
-                var target = event.target;
-                if (target.tagName.toLowerCase() === 'td' && target.parentNode.dataset.name) {
-                    var form = document.createElement('form');
-                    form.method = 'post';
-                    form.action = '/expand';
+            docuemnt.addEventListener("DOMContentLoaded", (event) => {
+                document.addEventListener('click', function (event) {
+                    var target = event.target;
+                    if (target.tagName.toLowerCase() === 'td' && target.parentNode.dataset.name) {
+                        var form = document.createElement('form');
+                        form.method = 'post';
+                        form.action = '/expand';
 
-                    var input = document.createElement('input');
-                    input.type = 'hidden';
-                    input.name = 'remove';
-                    input.value = target.parentNode.dataset.name;
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'remove';
+                        input.value = target.parentNode.dataset.name;
 
-                    form.appendChild(input);
-                    document.body.appendChild(form);
-                    form.submit();
-                }
+                        form.appendChild(input);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
             });
+
         </script>
     {% else %}
         <div>
