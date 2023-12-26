@@ -17,10 +17,11 @@ Saved
                 </tr>
             </thead>
             <tbody>
-                {% for stock in stocks %}
+                {% for idea in ideas %}
                     <tr data-name="{{ stock.name }}">
-                        <td>{{ stock.symbol }}</td>
-                        <td>{{ stock.price }}</td>
+                        <td>{{ stock.title }}</td>
+                        <td>{{ stock.date }}</td>
+                        <td></td>
                     </tr>
                 {% endfor %}
             </tbody>
