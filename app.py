@@ -50,6 +50,7 @@ def quiz():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+
     session.clear()
     if request.method == "POST":
         username = request.form.get("username")
