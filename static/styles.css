@@ -8,6 +8,20 @@
     src: url('NanumGothic-Regular.ttf') format('truetype');
 }
 
+body {
+    background-image: linear-gradient(to right, rgb(252, 252, 213), rgb(255, 243, 164));
+}
+
+header {
+    margin: 60px 5px 30px 5px;
+}
+
+main {
+    padding-bottom: 50px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
 h1 {
     font-family: "Roboto Mono", monospace;
     font-weight: bold;
