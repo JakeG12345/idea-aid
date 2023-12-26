@@ -1,7 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Charter:wght@600&display=swap");
+:root {
+    --c1: #F0F7F4;
+    --c2: #D6E8E6;
+    --c3: #99E1D9;
+    --c4: #70ABAF;
+    --c5: #474E51;
+    --c6: #32292F;
+}
 
 body {
-    background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255));
+    background-image: linear-gradient(to right, var(--c5), var(--c6));
+    color: var(--c2);
 }
 
 header {
@@ -17,17 +26,14 @@ main {
 
 h1 {
     font-size: 72px;
+    color: var(--c3);
 }
 
 h2 {
     font-size: 36px;
     padding-bottom: 5px;
+    color: var(--c1);
 }
-
-p {
-    font-family: "Charter";
-}
-
 
 .previousSelection {
     padding-top: 28px;

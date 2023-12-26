@@ -1,12 +1,12 @@
 nav {
     height: 85px;
-    background-color: rgb(206, 162, 116);
+    background-color: var(--c1);
 }
 
 nav .navbar-container {
     height: 100%;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 40px;
+    padding-right: 40px;
     
     display: flex;
     justify-content: space-between;
@@ -18,7 +18,7 @@ nav .navbar-container .side {
 }
 
 nav img {
-    height: 70px;
+    height: 55px;
 }
 
 nav ul {
@@ -27,7 +27,17 @@ nav ul {
     
     list-style: none;
     display: flex;
-    gap: 30px;
+    gap: 40px;
+}
+
+nav ul li a {
+    color: var(--c6);
+    font-size: large;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    color: var(--c4);
 }
 
 /* .nav-content, .mobile-menu{
