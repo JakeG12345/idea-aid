@@ -17,28 +17,47 @@
     <link href="/static/favicon.png" rel="icon">
 
     <link href="/static/styles.css" rel="stylesheet">
+    <link href="/static/nav.css" rel="stylesheet">
 
     <title>Idea Aid: {% block title %}{% endblock %}</title>
 
 </head>
 
 <body>
-    <nav class="border navbar navbar-expand-md sticky-top">
-        <div class="collapse navbar-collapse container-fluid" id="navbar">
-            {% if session["user_id"] %}
-            <a class="nav-item" href="/index"><img id="nav-logo"src="/static/logo.png"></a>
-            <ul class="navbar-nav me-auto mt-2">
-                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
-                <li class="nav-item"><a class="nav-link" href="/save">Your Ideas</a></li>
-                <li class="nav-item" id="login"><a class="nav-link" href="/login">Log Out</a></li>
-                {% else %}
-                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
-                <li class="nav-item" id="register"><a class="nav-link"  href="/register">Register</a></li>
-                <li class="nav-item" id="logout"><a class="nav-link" href="/login">Log In</a></li>
-                {% endif %}
-            </ul>
+    <nav>
+        <div class="navbar-container">
+            <div class="side">
+                <a href="/">
+                    <img src="/static/logo.png">
+                </a>
+                <ul>
+                    <li>
+                        <a href="/generator">Generator</a>
+                    </li>
+                    <li>
+                        <a href="/save">Your Ideas</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="side">
+                <ul>
+                    {% if session["user_id"] %}
+                        <li>
+                            <a href="/login">Log Out</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="/register">Register</a>
+                        </li>
+                        <li>
+                            <a href="/login">Log In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-        <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        
+        <!-- <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>
             <div class="bar3"></div>
@@ -59,7 +78,7 @@
             function toggleMobileMenu(menu) {
                 menu.classList.toggle('open'); 
             }
-        </script>
+        </script> -->
     </nav>
 
     <header class="container-fluid text-center">
