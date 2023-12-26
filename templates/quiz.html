@@ -30,28 +30,34 @@ Quiz
         </div>
 
         <script>
-            docuemnt.addEventListener("DOMContentLoaded", (event) => {
-                buttons = document.querySelectorAll("li.dropdown-menu");
-                buttons.forEach((button) => {
-                    button.addEventListener('click', function (event) {
+            document.addEventListener("DOMContentLoaded", (event) => {
+                document.body.addEventListener('click', function (event) {
+                    if (event.target.matches('.dropdown-menu .save')) {
                         var form = document.createElement('form');
                         form.method = 'post';
-
                         form.action = "/save";
-                        if (button.classList.contains("expand")){
-                            form.action = "/expand";
-                        }
                         var input = document.createElement('input');
                         input.type = 'hidden';
                         input.name = 'idea';
-                        input.value = button.dataset.name;
+                        input.value = event.target.dataset.name;
                         form.appendChild(input);
                         document.body.appendChild(form);
                         form.submit();
-                    });
-                })
+                    }
+                    else if (event.target.matches('.dropdown-menu .expand')) {
+                        var form = document.createElement('form');
+                        form.method = 'post';
+                        form.action = "/expand";
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = 'idea';
+                        input.value = event.target.dataset.name;
+                        form.appendChild(input);
+                        document.body.appendChild(form);
+                        form.submit();
+                    }
+                });
             });
-
         </script>
     {% else %}
         <div>
