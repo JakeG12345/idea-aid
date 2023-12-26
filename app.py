@@ -107,7 +107,16 @@ def login():
     else:
         return render_template("login.html")
 
+@app.route("/save", methods=["GET", "POST"],)
+@login_required
+def save():
+    if request.form.method == "POST":
+        if not request.form.__contains__("idea"):
+            return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
+        idea = request.form.get("idea")
+        db.execute("INSERT INTO ")
 
+    return render_template("saved.html")
 
 @app.route("/expand", methods=["GET", "POST"])
 @login_required
