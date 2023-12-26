@@ -44,7 +44,7 @@ def get_ideas(quiz_selections, client):
             messages=[
                 {
                     "role": "user",
-                    "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. It does this through a series of multiple choice questions that lead to an idea. I need you to give me some ideas.{past_selections}. IMPORTANT: You should return the possible ideas comma-separated. In other words, it should look like 'idea 1,idea 2 word word,idea 3' you get the point."
+                    "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. It does this through a series of multiple choice questions that lead to an idea. I need you to give me some ideas.{past_selections}. IMPORTANT: You should return the possible ideas comma-separated. In other words, it should look like 'idea 1,idea 2 word word,idea 3' you get the point. IMPORTANT: you should not return an answer encased in quotation marks or other symbols"
                 }
             ]
         )
@@ -63,7 +63,7 @@ def get_past_selections_str(quiz_selections):
         return " Here are past question and answers: " + past_selections
     else:
         return ""
-    
+
 def expand_idea(idea, client):
     data = client.chat.completions.create(
         model="gpt-4-1106-preview",
@@ -83,7 +83,7 @@ def expand_idea(idea, client):
             }
         ]
     )
-            
+
     expansion = data.choices[0].message.content
     similars = data2.choices[0].message.content.split(",")
     return expansion, similars
