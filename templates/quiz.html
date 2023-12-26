@@ -17,12 +17,10 @@ Quiz
                         {{ idea }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item">
-                            <button class="dropdown-item" onclick="submitForm('/save', '{{ idea }}')">
-                                Save
-                            </button>
+                        <li class="dropdown-item" data-name="{{ idea }}">
+                            Save
                         </li>
-                        <li class="dropdown-item" data-name="{{ stock.name }}">
+                        <li class="dropdown-item" data-name="{{ idea }}">
                             Expand
                         </li>
                     </ul>
