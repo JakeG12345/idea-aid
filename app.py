@@ -107,10 +107,11 @@ def login():
     else:
         return render_template("login.html")
 
+
 @app.route("/save", methods=["GET"])
 @login_required
-def expand():
-    return ender_template("saved.html")
+def save():
+    return render_template("saved.html")
 
 @app.route("/expand", methods=["GET", "POST"])
 @login_required
