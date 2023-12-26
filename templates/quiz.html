@@ -32,22 +32,25 @@ Quiz
             </div>
             {% endfor %}
         </div>
-
+        
         <script>
-            function submitForm(action, idea) {
-                const form = document.createElement('form');
-                form.method = 'post';
-                form.action = action;
+            document.addEventListener('click', function (event) {
+                var target = event.target;
+                if (target.tagName.toLowerCase() === 'td' && target.parentNode.dataset.name) {
+                    var form = document.createElement('form');
+                    form.method = 'post';
+                    form.action = '/quote';
 
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'idea';
-                input.value = idea;
+                    var input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = 'remove';
+                    input.value = target.parentNode.dataset.name;
 
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
-            }
+                    form.appendChild(input);
+                    document.body.appendChild(form);
+                    form.submit();
+                }
+            });
         </script>
     {% else %}
         <div>
