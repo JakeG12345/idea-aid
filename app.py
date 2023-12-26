@@ -17,7 +17,7 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-# JG V1
+# Fixed Save and Expand buttons
 
 QUESTIONS_BEFORE_IDEAS = 5
 
