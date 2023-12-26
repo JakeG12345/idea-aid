@@ -47,12 +47,6 @@ def quiz():
 
     return render_template("quiz.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
 
-@app.route("/save", methods=["POST"])
-@login_required
-def save():
-    return redirect("/")
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     session.clear()
