@@ -73,14 +73,15 @@ header {
     background-color: #E0E9E0;
 }
 
-.nav-content {
-    margin-top: 20px;
+.nav-content, .mobile-menu{
+    margin-top: 6px;
     list-style: none;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
+
 
 .nav-link {
     padding: 5px;
@@ -104,25 +105,23 @@ header {
     display: none;
     cursor: pointer;
     margin: auto 0;
-    color: black;
-    background-color: black;
 }
 
 #hamburger-icon div {
     width: 35px;
     height: 3px;
-    background-color: whitesmoke;
+    background-color: grey;
     margin: 6px 0px;
     transition: 0.4s;
 }
 
 .open .bar1 {
-    opacity: 0;
+    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
+    transform: rotate(-45deg) translate(-6px, 6px);
 }
 
 .open .bar2 {
-    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-    transform: rotate(-45deg) translate(-6px, 6px);
+    opacity: 0;
 }
 
 .open .bar3 {
@@ -135,6 +134,10 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    /* color: blue;
+    font-size: large; */
+    background-color: rgb(0, 0, 0);
+    opacity: 80%;
 }
 
 .mobile-menu {
@@ -144,6 +147,14 @@ header {
     left: 0px;
     height: calc(100vh - 56px);
     width: 100%;
+}
+
+.mobile-menu-item, .mobile-menu-link {
+    color: rgb(208, 219, 255);
+    font-size: x-large;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-decoration: none;
 }
 
 @media only screen and (max-width: 600px) {
