@@ -86,6 +86,7 @@ def register():
             username, generate_password_hash(password), datetime.datetime.now())
         userID = db.execute(
             "SELECT userID FROM users WHERE username = ?", username)
+        session["user_id"] = userID[0]["userID"]
         print(session["user_id"])
         return redirect("/")
 
