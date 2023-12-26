@@ -27,7 +27,7 @@ def index():
     return render_template("index.html")
 
 @app.route("/quiz", methods=["GET", "POST"])
-# @login_required
+@login_required
 def quiz():
     if request.method == "POST":
         # add selected option to selections session data
