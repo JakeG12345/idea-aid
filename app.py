@@ -113,6 +113,11 @@ def login():
     else:
         return render_template("login.html")
 
+@app.route("/save", methods=["GET"])
+@login_required
+def expand():
+    render_template("saved.html")
+
 @app.route("/expand", methods=["GET", "POST"])
 @login_required
 def expand():
