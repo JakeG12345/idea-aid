@@ -111,6 +111,7 @@ def login():
 @app.route("/save", methods=["GET", "POST"],)
 @login_required
 def save():
+    uid = session["user_id"]
     if request.form.method == "POST":
         if not request.form.__contains__("idea"):
             return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
@@ -120,9 +121,10 @@ def save():
         dt = datetime.now()
         formattedTime = dt.strftime("%Y-%m-%d %H:%M:%S")
 
-        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", session["user_id"], idea, formattedTime)
+        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", uid, idea, formattedTime)
 
-    return render_template("saved.html")
+    ideas = db.execute("SELECT * FROM ideas WHERE userID = ?", uid)
+    return render_template("saved.html", ideas=ideas)
 
 @app.route("/expand", methods=["GET", "POST"])
 @login_required
