@@ -37,7 +37,7 @@
                 <li class="nav-item" id="logout"><a class="nav-link" href="/login">Log In</a></li>
                 {% endif %}
             </ul>
-        </nav>
+        </div>
         <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
             <div class="bar1"></div>
             <div class="bar2"></div>
@@ -54,15 +54,16 @@
                 {% endif %}
             </ul>
         </div>
-    </nav>
 
-    <header class="text-center">
-        {% block header %}{% endblock %}
         <script>
             function toggleMobileMenu(menu) {
                 menu.classList.toggle('open'); 
             }
         </script>
+    </nav>
+
+    <header class="container-fluid text-center">
+        {% block header %}{% endblock %}
     </header>
 
     <main class="container-fluid text-center">

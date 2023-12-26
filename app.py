@@ -50,14 +50,14 @@ def generator():
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
             ideas = get_ideas(selections, client)
-            return render_template("quiz.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True)
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True)
     else:
         session["quiz_selections"] = []  # dicts with format {question, answer} - set to empty everytime start quiz (GET page)
 
     question, options = get_question_and_answers(session["quiz_selections"], client)
     session["quiz_selections"].append({"question": question, "options": options})
 
-    return render_template("quiz.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
+    return render_template("generator.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():

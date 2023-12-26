@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Quiz
+    Generator
 {% endblock %}
 
 {% block header %}
@@ -67,7 +67,7 @@ Quiz
         <div>
             <h2>{{ current_selection["question"] }}</h2>
 
-            <form action="/quiz" method="post">
+            <form action="/generator" method="post">
                 <div class="mb-3">
                     {% for option in current_selection["options"] %}
                         <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
@@ -76,7 +76,7 @@ Quiz
                     {% endfor %}         
                 </div>
             </form>
-            <form action="/quiz" method="post">
+            <form action="/generator" method="post">
                 <div class="mt-3 mx-auto" style="display: flex; width: 80vw; gap: 30px;">
                     <input class="form-control" name="custom" required
                         placeholder="Add custom answer" type="text">

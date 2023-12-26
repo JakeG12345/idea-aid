@@ -20,6 +20,7 @@ main {
     padding-bottom: 50px;
     padding-left: 4px;
     padding-right: 4px;
+    display: block;
 }
 
 h1 {
@@ -74,7 +75,7 @@ ul {
     background-color: blue;
 }
 
-header {
+/* header {
     padding: 0 20px;
     margin: 0;
     height: 56px;
@@ -82,7 +83,7 @@ header {
     display: flex;
     justify-content: space-between;
     background-color: #E0E9E0;
-}
+} */
 
 .nav-content, .mobile-menu{
     margin-top: 6px;
