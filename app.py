@@ -77,8 +77,9 @@ def register():
 
         db.execute("INSERT INTO users(username, hash, date_created) VALUES(?, ?, ?)",
             username, generate_password_hash(password), datetime.datetime.now())
-        session["user_id"] = db.execute(
+        userID = db.execute(
             "SELECT userID FROM users WHERE username = ?", username)
+        print(session["user_id"])
         return redirect("/")
 
     else:
