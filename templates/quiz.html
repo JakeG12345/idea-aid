@@ -17,10 +17,10 @@ Quiz
                         {{ idea }}
                     </button>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item" data-name="{{ idea }}">
+                        <li class="dropdown-item save" data-name="{{ idea }}">
                             Save
                         </li>
-                        <li class="dropdown-item" data-name="{{ idea }}">
+                        <li class="dropdown-item expand" data-name="{{ idea }}">
                             Expand
                         </li>
                     </ul>
@@ -31,6 +31,8 @@ Quiz
 
         <script>
             docuemnt.addEventListener("DOMContentLoaded", (event) => {
+                buttons = document.querySelectorAll("li.dropdown-menu");
+
                 document.addEventListener('click', function (event) {
                     var target = event.target;
                     if (target.tagName.toLowerCase() === 'td' && target.parentNode.dataset.name) {
