@@ -21,7 +21,7 @@ Saved
                     <tr data-name="{{ idea.title }}">
                         <td>{{ idea.title }}</td>
                         <td>{{ idea.date_edited }}</td>
-                        <td>&rarr;</td>
+                        <td onclick="submitForm('/expand', '{{ idea }}')">&rarr;</td>
                     </tr>
                 {% endfor %}
             </tbody>
