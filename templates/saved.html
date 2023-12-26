@@ -7,6 +7,24 @@ Saved
 {% block main %}
 <div>
     <h1>Your Saved Ideas</h1>
-    <p>your saved ideas will go here</p>
+    <div style="width: 200px; margin: auto;">
+        <table class="table" id="stockTable">
+            <thead>
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Expand</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock in stocks %}
+                    <tr data-name="{{ stock.name }}">
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.price }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
