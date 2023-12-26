@@ -18,32 +18,32 @@ Saved
             </thead>
             <tbody>
                 {% for idea in ideas %}
-                    <tr data-name="{{ idea.title }}">
-                        <td>{{ idea.title }}</td>
-                        <td>{{ idea.date_edited }}</td>
-                        <td class="expand" data-name="{{ idea.title }}">&rarr;</td>
-                    </tr>
+                <tr data-name="{{ idea.title }}">
+                    <td>{{ idea.title }}</td>
+                    <td>{{ idea.date_edited }}</td>
+                    <td class="expand" data-name="{{ idea.title }}">&rarr;</td>
+                </tr>
                 {% endfor %}
-                <script>
-                    document.addEventListener("DOMContentLoaded", (event) => {
-                        document.body.addEventListener('click', function (event) {
-                            else if (event.target.matches('td.expand')) {
-                                var form = document.createElement('form');
-                                form.method = 'post';
-                                form.action = "/expand";
-                                var input = document.createElement('input');
-                                input.type = 'hidden';
-                                input.name = 'idea';
-                                input.value = event.target.dataset.name;
-                                form.appendChild(input);
-                                document.body.appendChild(form);
-                                form.submit();
-                            }
-                        });
-                    });
-                </script>
             </tbody>
         </table>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", (event) => {
+        document.body.addEventListener('click', function (event) {
+            if (event.target.matches('td.expand')) {
+                var form = document.createElement('form');
+                form.method = 'post';
+                form.action = "/expand";
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'idea';
+                input.value = event.target.dataset.name;
+                form.appendChild(input);
+                document.body.appendChild(form);
+                form.submit();
+            }
+        });
+    });
+</script>
 {% endblock %}
