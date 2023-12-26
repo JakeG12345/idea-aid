@@ -37,7 +37,7 @@ def generator():
         # add selected option to selections session data
         selections = session["quiz_selections"]
 
-        if request.form.get("custom") != "":
+        if request.form.get("custom") != "" and request.form.get("custom") != None:
             selected_option = request.form.get("custom")
             options = selections[-1]["options"]
             options.append(selected_option)
