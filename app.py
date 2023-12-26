@@ -119,10 +119,7 @@ def save():
 
         idea = request.form.get("idea")
 
-        dt = datetime.now()
-        formattedTime = dt.strftime("%Y-%m-%d %H:%M:%S")
-
-        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", uid, idea, formattedTime)
+        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", uid, idea, datetime.datetime.now())
 
     ideas = db.execute("SELECT * FROM ideas WHERE userID = ?", uid)
     return render_template("saved.html", ideas=ideas)
