@@ -25,7 +25,15 @@ main {
 h1 {
     font-family: "Roboto Mono", monospace;
     font-weight: bold;
-    font-size: 110px;
+    font-size: 72px;
+}
+
+h2 {
+    font-size: 36px;
+    color: blue;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding-bottom: 5px;
 }
 
 p {

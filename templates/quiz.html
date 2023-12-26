@@ -4,8 +4,12 @@
 Quiz
 {% endblock %}
 
+{% block header %}
+    <h1>Idea Generator</h1>
+    <p>Please answer a few questions in this adaptive quiz to find a great idea.</p>
+{% endblock %}
+
 {% block main %}
-<div>
     {% if has_ideas %}
         <div>
             <h2>Here's What We Came Up With:</h2>
@@ -61,9 +65,8 @@ Quiz
         </script>
     {% else %}
         <div>
-            <div class="mb-3">
-                <h1>{{ current_selection["question"] }}</h1>
-            </div>
+            <h2>{{ current_selection["question"] }}</h2>
+
             <form action="/quiz" method="post">
                 <div class="mb-3">
                     {% for option in current_selection["options"] %}
@@ -106,5 +109,4 @@ Quiz
             </form>
         </div>
     {% endfor %}
-</div>
 {% endblock %}
