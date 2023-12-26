@@ -37,13 +37,16 @@ Quiz
                         var form = document.createElement('form');
                         form.method = 'post';
 
-                        
+                        form.action = "/save";
+                        if (button.classList.contains("expand")){
+                            form.action = "expand";
+                        }
 
-                        form.action = '/expand';
+
                         var input = document.createElement('input');
                         input.type = 'hidden';
-                        input.name = 'remove';
-                        input.value = target.parentNode.dataset.name;
+                        input.name = 'idea';
+                        input.value = button.dataset.name;
                         form.appendChild(input);
                         document.body.appendChild(form);
                         form.submit();
