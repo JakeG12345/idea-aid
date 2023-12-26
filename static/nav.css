@@ -21,13 +21,8 @@ nav img {
     height: 55px;
 }
 
-nav ul {
-    margin-top: auto;
-    margin-bottom: auto;
-    
-    list-style: none;
-    display: flex;
-    gap: 40px;
+nav .side ul {
+    display: none;
 }
 
 nav ul li a {
@@ -40,36 +35,17 @@ nav ul li a:hover {
     color: var(--c4);
 }
 
-/* .nav-content, .mobile-menu{
-    margin-top: 6px;
-    list-style: none;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.nav-link:hover {
-    transform: scale(1.1);
-    transition: 0.3s;
-}
-
-#login,
-#register,
-#logout {
-    padding: 5px 8px;
-}
-
+/* for mobile */
 #hamburger-icon {
-    display: none;
+    display: block;
     cursor: pointer;
     margin: auto 0;
 }
 
 #hamburger-icon div {
-    width: 35px;
-    height: 3px;
-    background-color: grey;
+    width: 45px;
+    height: 4px;
+    background-color: var(--c6);
     margin: 6px 0px;
     transition: 0.4s;
 }
@@ -93,45 +69,37 @@ nav ul li a:hover {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    /* color: blue;
     font-size: large;
-    background-color: rgb(0, 0, 0);
-    opacity: 80%;
+    background-color: var(--c1);
+    /* opacity: 90%; */
 }
 
 .mobile-menu {
     display: none;
     position: absolute;
-    top: 50px;
+    top: 85px;
     left: 0px;
-    height: calc(100vh - 56px);
+    height: calc(100vh - 85px);
     width: 100%;
+
+    padding-top: 50px;
+    list-style: none;
+    gap: 40px;
 }
 
-.mobile-menu-item, .mobile-menu-link {
-    color: rgb(208, 219, 255);
-    font-size: x-large;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-decoration: none;
-}
-
-@media only screen and (max-width: 600px) {
-    #navbar {
+/* for desktop */
+@media only screen and (min-width: 768px) {
+    #hamburger-icon {
         display: none;
     }
 
-    #hamburger-icon {
+    nav .side ul {
         display: block;
+        margin-top: auto;
+        margin-bottom: auto;
+    
+        list-style: none;
+        display: flex;
+        gap: 40px;
     }
 }
-
-#nav-logo {
-    width: 211.75px;
-    height: 50px;
-    margin-top: 4px;
-}
-
-ul {
-    display: flex;
-} */

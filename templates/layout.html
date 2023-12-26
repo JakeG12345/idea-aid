@@ -54,31 +54,38 @@
                         </li>
                     {% endif %}
                 </ul>
+            </div>         
+            <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+                <ul class="mobile-menu">
+                    <li>
+                        <a href="/generator">Generator</a>
+                    </li>
+                    <li>
+                        <a href="/save">Your Ideas</a>
+                    </li>
+                    {% if session["user_id"] %}
+                        <li>
+                            <a href="/login">Log Out</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="/register">Register</a>
+                        </li>
+                        <li>
+                            <a href="/login">Log In</a>
+                        </li>
+                    {% endif %}
+                </ul>
             </div>
+            <script>
+                function toggleMobileMenu(menu) {
+                    menu.classList.toggle('open'); 
+                }
+            </script>
         </div>
-        
-        <!-- <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-            <ul class="mobile-menu">
-                {% if session["user_id"] %}   
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/quiz">Generator</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/save">Your Ideas</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/login">Log Out</a></li>
-                {% else %}
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/quiz">Generator</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/register">Register</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/login">Log In</a></li>
-                {% endif %}
-            </ul>
-        </div>
-
-        <script>
-            function toggleMobileMenu(menu) {
-                menu.classList.toggle('open'); 
-            }
-        </script> -->
     </nav>
 
     <header class="container-fluid text-center">
