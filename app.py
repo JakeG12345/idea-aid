@@ -114,8 +114,13 @@ def save():
     if request.form.method == "POST":
         if not request.form.__contains__("idea"):
             return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
+
         idea = request.form.get("idea")
-        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", uid, idea, )
+
+        dt = datetime.now()
+        formattedTime = dt.strftime("%Y-%m-%d %H:%M:%S")
+
+        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", session["user_id"], idea, formatedTime)
 
     return render_template("saved.html")
 
