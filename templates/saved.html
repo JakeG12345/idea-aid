@@ -7,7 +7,7 @@ Saved
 {% block main %}
 <div>
     <h1>Your Saved Ideas</h1>
-    <div style="width: 200px; margin: auto;">
+    <div style="width: 700px; margin: auto;">
         <table class="table" id="stockTable">
             <thead>
                 <tr>
@@ -18,9 +18,9 @@ Saved
             </thead>
             <tbody>
                 {% for idea in ideas %}
-                    <tr data-name="{{ stock.name }}">
+                    <tr data-name="{{ idea.title }}">
                         <td>{{ idea.title }}</td>
-                        <td>{{ idea.date }}</td>
+                        <td>{{ idea.date_edited }}</td>
                         <td>&rarr;</td>
                     </tr>
                 {% endfor %}
