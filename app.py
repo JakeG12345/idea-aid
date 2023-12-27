@@ -27,11 +27,8 @@ QUESTIONS_BEFORE_IDEAS = 3
 def index():
     return render_template("index.html")
 
-@app.route("/quiz")
-def quiz():
-    return redirect("/generator")
-
 @app.route("/generator", methods=["GET", "POST"])
+@login_required
 def generator():
     if request.method == "POST":
         # add selected option to selections session data
@@ -135,9 +132,14 @@ def save():
 
     return f"Saved idea {idea} successfully"
 
-@app.route("/saved")
+@app.route("/saved", methods=["POST", "GET"])
 @login_required
 def saved():
+    if request.method == "POST":
+        ideaID = request.form.get("ideaID")
+        print("Idea id to delete:", ideaID)
+        db.execute("DELETE FROM ideas WHERE ideaID = ?", ideaID)
+
     uid = session["user_id"]
     ideas = db.execute("SELECT * FROM ideas WHERE userID = ? ORDER BY date_edited DESC", uid)
     return render_template("saved.html", ideas=ideas)
