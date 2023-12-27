@@ -85,6 +85,7 @@ nav ul li a:hover {
     padding-top: 50px;
     list-style: none;
     gap: 40px;
+    z-index: 10;
 }
 
 /* for desktop */
