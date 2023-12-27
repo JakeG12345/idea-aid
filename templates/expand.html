@@ -6,6 +6,31 @@ More About Idea
 
 {% block header %}
     <h1>{{ idea }}</h1>
+    {% if idea in saved_ideas %}
+        <div class="expand-subtext">
+            <span>
+                <p>You have this idea saved</p>
+
+                <form action="/expand" method="post">
+                    <button class="btn btn-danger" name="delete-idea" value="{{ idea }}" type="submit">
+                        Remove From Saved
+                    </button>
+                </form>
+            </span>
+        </div>
+    {% else %}
+        <div class="expand-subtext">
+            <span>
+                <p>You have not saved this idea</p>
+
+                <form action="/expand" method="post">
+                    <button class="btn btn-primary" name="save-idea" value="{{ idea }}" type="submit">
+                        Save
+                    </button>
+                </form>
+            </span>
+        </div>
+    {% endif %}
 {% endblock %}
 
 {% block main %}
@@ -29,11 +54,19 @@ More About Idea
                                     {{ idea }}
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <form action="/save" method="post">
-                                        <button class="dropdown-item save" name="idea" value="{{ idea }}" type="submit">
-                                            Save
-                                        </button>
-                                    </form>
+                                    {% if idea in saved_ideas %}
+                                        <form action="/expand" method="post">
+                                            <button class="dropdown-item save" name="delete-idea" value="{{ idea }}" type="submit">
+                                                Remove from saved
+                                            </button>
+                                        </form>
+                                    {% else %}
+                                        <form action="/expand" method="post">
+                                            <button class="dropdown-item save" name="save-idea" value="{{ idea }}" type="submit">
+                                                Save
+                                            </button>
+                                        </form>
+                                    {% endif %}
                                     <form action="/expand" method="post">
                                         <button class="dropdown-item save" name="idea" value="{{ idea }}" type="submit">
                                             Expand

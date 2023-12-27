@@ -139,12 +139,19 @@ def saved():
 @app.route("/expand", methods=["GET", "POST"])
 @login_required
 def expand():
-    if not request.form.__contains__("idea"):
-        return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
-
-    idea = request.form.get("idea")
-    expansion, similars = expand_idea(idea, client)
-    return render_template("expand.html", idea=idea, expansion=expansion, similar_ideas=similars)
+    if request.method == "POST":
+        if request.form.get("idea") != "" and request.form.get("idea") != None:
+            idea = request.form.get("idea")
+            session["expanded-idea"] = idea
+            expansion, similars = expand_idea(idea, client)
+            session["expanded-expansion"] = expansion
+            session["expanded-similars"] = similars
+        elif request.form.get("save-idea") != "" and request.form.get("save-idea") != None:
+            save_idea(request.form.get("save-idea"))
+        elif request.form.get("delete-idea") != "" and request.form.get("delete-idea") != None:
+            delete_idea(request.form.get("delete-idea"))
+        
+    return render_template("expand.html", idea=session["expanded-idea"], expansion=session["expanded-expansion"], similar_ideas=session["expanded-similars"], saved_ideas=get_saved_ideas_titles())
 
 @app.errorhandler(404)
 def page_not_found(e):
