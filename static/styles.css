@@ -52,7 +52,7 @@ h2 {
 }
 
 .previousSelection h2 {
-    opacity: 70%;
+    opacity: 60%;
 }
 
 .errorMsg {
@@ -72,12 +72,11 @@ input {
 }
 
 .expand-flex {
-    display: flex;
-    justify-content: space-around;
+    display: block;
 }
 
-.expand-flex section {
-    width: 44vw;
+.expand-flex .description-container {
+    margin-bottom: 32px;
 }
 
 /* for desktop */
@@ -85,4 +84,13 @@ input {
     h1 {
         font-size: 100px;
     }
+
+    .expand-flex {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .expand-flex section {
+        width: 44vw;
+    }    
 }
