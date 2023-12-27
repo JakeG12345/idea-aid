@@ -18,9 +18,6 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-# Version includes resolved changes from Jake's issue on 26/12/2023 - 23:33
-# Test 2
-
 QUESTIONS_BEFORE_IDEAS = 3
 
 @app.route("/")
@@ -40,6 +37,16 @@ def generator():
             options.append(selected_option)
             selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": options}
             session["quiz_selections"] = selections
+        elif request.form.get("save-idea") != "" and request.form.get("save-idea") != None:
+            idea = request.form.get("save-idea")
+            save_idea(idea)
+            saved_ideas = get_saved_ideas_titles()
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=session["ideas"], has_ideas=True, saved_ideas=saved_ideas)
+        elif request.form.get("delete-idea") != "" and request.form.get("delete-idea") != None:
+            idea = request.form.get("delete-idea")
+            delete_idea(idea)
+            saved_ideas = get_saved_ideas()
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=session["ideas"], has_ideas=True, saved_ideas=saved_ideas)
         else:
             selected_option = request.form.get("option")
             selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": selections[-1]["options"]}
@@ -47,14 +54,16 @@ def generator():
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
             ideas = get_ideas(selections, client)
-            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True)
+            session["ideas"] = ideas
+            saved_ideas = get_saved_ideas()
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True, saved_ideas=saved_ideas)
     else:
         session["quiz_selections"] = []  # dicts with format {question, answer} - set to empty everytime start quiz (GET page)
 
     question, options = get_question_and_answers(session["quiz_selections"], client)
     session["quiz_selections"].append({"question": question, "options": options})
 
-    return render_template("generator.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
+    return render_template("generator.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False, saved_ideas=[])
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -118,31 +127,14 @@ def login():
     else:
         return render_template("login.html")
 
-@app.route("/save", methods=["POST"])
-@login_required
-def save():
-    if not request.form.__contains__("idea"):
-        return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
-    
-    uid = session["user_id"]
-    idea = request.form.get("idea")
-    print("Saving idea:", idea)
-
-    db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", uid, idea, datetime.datetime.now())
-
-    return f"Saved idea {idea} successfully"
-
 @app.route("/saved", methods=["POST", "GET"])
 @login_required
 def saved():
     if request.method == "POST":
         ideaID = request.form.get("ideaID")
-        print("Idea id to delete:", ideaID)
-        db.execute("DELETE FROM ideas WHERE ideaID = ?", ideaID)
+        delete_idea_with_id(ideaID)
 
-    uid = session["user_id"]
-    ideas = db.execute("SELECT * FROM ideas WHERE userID = ? ORDER BY date_edited DESC", uid)
-    return render_template("saved.html", ideas=ideas)
+    return render_template("saved.html", ideas=get_saved_ideas())
 
 @app.route("/expand", methods=["GET", "POST"])
 @login_required
@@ -157,3 +149,24 @@ def expand():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("error.html", header="404", message="Page not found")
+
+
+# Helper functions decided to put in app.py because of dependencies
+def save_idea(idea):
+    db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", session["user_id"], idea, datetime.datetime.now())
+
+def delete_idea_with_id(ideaID):
+    db.execute("DELETE FROM ideas WHERE ideaID = ?", ideaID)
+
+def delete_idea(idea):
+    db.execute("DELETE FROM ideas WHERE title = ?", idea)
+
+def get_saved_ideas_titles():
+    ideas = []
+    for row in get_saved_ideas():
+        ideas.append(row["title"])
+    return ideas
+
+def get_saved_ideas():
+    uid = session["user_id"]
+    return db.execute("SELECT * FROM ideas WHERE userID = ? ORDER BY date_edited DESC", uid)
