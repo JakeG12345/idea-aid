@@ -21,7 +21,7 @@ db = SQL("sqlite:///db.db")
 # Version includes resolved changes from Jake's issue on 26/12/2023 - 23:33
 # Test 2
 
-QUESTIONS_BEFORE_IDEAS = 6
+QUESTIONS_BEFORE_IDEAS = 3
 
 @app.route("/")
 def index():
@@ -122,19 +122,25 @@ def login():
     else:
         return render_template("login.html")
 
-@app.route("/save", methods=["GET", "POST"],)
+@app.route("/save", methods=["POST"])
 @login_required
 def save():
+    if not request.form.__contains__("idea"):
+        return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
+    
     uid = session["user_id"]
-    if request.method == "POST":
-        if not request.form.__contains__("idea"):
-            return render_template("error.html", header="400", message="User did not provide an idea string to page or was in invalid correct form")
+    idea = request.form.get("idea")
+    print("Saving idea:", idea)
 
-        idea = request.form.get("idea")
+    db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?)", uid, idea, datetime.datetime.now())
 
-        db.execute("INSERT INTO ideas (userID, title, date_edited) VALUES (?, ?, ?) ORDER BY date_edited ", uid, idea, datetime.datetime.now())
+    return f"Saved idea {idea} successfully"
 
-    ideas = db.execute("SELECT * FROM ideas WHERE userID = ?", uid)
+@app.route("/saved")
+@login_required
+def saved():
+    uid = session["user_id"]
+    ideas = db.execute("SELECT * FROM ideas WHERE userID = ? ORDER BY date_edited DESC", uid)
     return render_template("saved.html", ideas=ideas)
 
 @app.route("/expand", methods=["GET", "POST"])

@@ -29,49 +29,22 @@ More About Idea
                                     {{ idea }}
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li class="dropdown-item save" data-name="{{ idea }}">
-                                        Save
-                                    </li>
-                                    <li class="dropdown-item expand" data-name="{{ idea }}">
-                                        Expand
-                                    </li>
+                                    <form action="/save" method="post">
+                                        <button class="dropdown-item save" name="idea" value="{{ idea }}" type="submit">
+                                            Save
+                                        </button>
+                                    </form>
+                                    <form action="/expand" method="post">
+                                        <button class="dropdown-item save" name="idea" value="{{ idea }}" type="submit">
+                                            Expand
+                                        </button>
+                                    </form>
                                 </ul>
                             </div>
                         </div>
                     {% endfor %}
                 </div>
             </section>
-
-            <script>
-                document.addEventListener("DOMContentLoaded", (event) => {
-                    document.body.addEventListener('click', function (event) {
-                        if (event.target.matches('.dropdown-menu .save')) {
-                            var form = document.createElement('form');
-                            form.method = 'post';
-                            form.action = "/save";
-                            var input = document.createElement('input');
-                            input.type = 'hidden';
-                            input.name = 'idea';
-                            input.value = event.target.dataset.name;
-                            form.appendChild(input);
-                            document.body.appendChild(form);
-                            form.submit();
-                        }
-                        else if (event.target.matches('.dropdown-menu .expand')) {
-                            var form = document.createElement('form');
-                            form.method = 'post';
-                            form.action = "/expand";
-                            var input = document.createElement('input');
-                            input.type = 'hidden';
-                            input.name = 'idea';
-                            input.value = event.target.dataset.name;
-                            form.appendChild(input);
-                            document.body.appendChild(form);
-                            form.submit();
-                        }
-                    });
-                });
-            </script>
         </div>
     </div>
 {% endblock %}
