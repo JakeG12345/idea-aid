@@ -25,7 +25,7 @@ body {
 }
 
 header {
-    margin: 30px 5px 30px 5px;
+    margin: 30px 35px 30px 35px;
 }
 
 main {
@@ -36,7 +36,7 @@ main {
 }
 
 h1 {
-    font-size: 100px;
+    font-size: 80px;
     color: var(--c3);
 }
 
@@ -68,4 +68,11 @@ input {
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+/* for desktop */
+@media only screen and (min-width: 768px) {
+    h1 {
+        font-size: 100px;
+    }
 }
