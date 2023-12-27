@@ -22,11 +22,6 @@ body {
     overflow-x: hidden;
 }
 
-p {
-    margin-left: 16vw;
-    margin-right: 16vw;
-}
-
 /* Hide scrollbar for Chrome, Safari and Opera */
 body::-webkit-scrollbar {
     display: none;
@@ -93,20 +88,14 @@ input {
     margin-bottom: 32px;
 }
 
-/* for desktop */
-@media only screen and (min-width: 768px) {
-    h1 {
-        font-size: 100px;
-    }
+.saved-ideas table {
+    background-color: var(--c1);
+}
 
-    .expand-flex {
-        display: flex;
-        justify-content: space-around;
-    }
-    
-    .expand-flex section {
-        width: 44vw;
-    }    
+.saved-ideas td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: middle;
 }
 
 .logo-text {
@@ -132,10 +121,18 @@ input {
     color: #E3B77B;
 }
 
-a {
-    color: var(--c1);
-}
+/* for desktop */
+@media only screen and (min-width: 768px) {
+    h1 {
+        font-size: 100px;
+    }
 
-a:hover {
-    color: lightblue;
+    .expand-flex {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .expand-flex section {
+        width: 44vw;
+    }    
 }
