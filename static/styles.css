@@ -51,6 +51,7 @@ main {
 
 h1 {
     font-size: 80px;
+    font-family: Atkinson Hyperlegible;
     color: var(--c3);
 }
 
@@ -129,4 +130,12 @@ input {
     margin: 50px 0 20vh 0;
     font-size: 45px;
     color: #E3B77B;
+}
+
+a {
+    color: var(--c1);
+}
+
+a:hover {
+    color: lightblue;
 }

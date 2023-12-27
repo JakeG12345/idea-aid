@@ -32,7 +32,6 @@ def quiz():
     return redirect("/generator")
 
 @app.route("/generator", methods=["GET", "POST"])
-@login_required
 def generator():
     if request.method == "POST":
         # add selected option to selections session data
