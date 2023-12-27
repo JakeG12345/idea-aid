@@ -1,31 +1,35 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Quiz
+    Generator
+{% endblock %}
+
+{% block header %}
+    <h1>Idea Generator</h1>
+    <p>Please answer a few questions in this adaptive quiz to find a great idea.</p>
 {% endblock %}
 
 {% block main %}
-<div>
     {% if has_ideas %}
         <div>
-            <h2>Here's What We Came Up With:</h2>
+            <h2>Here's what we came up with</h2>
             {% for idea in ideas %}
-            <div class="mb-3">
-                <div class="btn-group">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        {{ idea }}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item save" data-name="{{ idea }}">
-                            Save
-                        </li>
-                        <li class="dropdown-item expand" data-name="{{ idea }}">
-                            Expand
-                        </li>
-                    </ul>
+                <div class="mb-3">
+                    <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ idea }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item save" data-name="{{ idea }}">
+                                Save
+                            </li>
+                            <li class="dropdown-item expand" data-name="{{ idea }}">
+                                Expand
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
@@ -61,11 +65,10 @@ Quiz
         </script>
     {% else %}
         <div>
-            <div class="mb-3">
-                <h1>{{ current_selection["question"] }}</h1>
-            </div>
-            <form action="/quiz" method="post">
-                <div class="mb-3">
+            <h2>{{ current_selection["question"] }}</h2>
+
+            <form action="/generator" method="post">
+                <div class="mb-3 form-buttons">
                     {% for option in current_selection["options"] %}
                         <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
                             {{ option }}
@@ -73,9 +76,9 @@ Quiz
                     {% endfor %}         
                 </div>
             </form>
-            <form action="/quiz" method="post">
+            <form action="/generator" method="post">
                 <div class="mt-3 mx-auto" style="display: flex; width: 80vw; gap: 30px;">
-                    <input class="form-control" name="custom" required
+                    <input class="form-control" name="custom" required autocomplete="off"
                         placeholder="Add custom answer" type="text">
                     <button class="btn btn-primary" style="width: 300px;" type="submit">
                         Submit Custom Option
@@ -86,12 +89,11 @@ Quiz
     {% endif %}
 
     {% for selection in previous_selections %}
-        <div>
-            <div class="mb-3">
-                <h1>{{ selection["question"] }}</h1>
-            </div>
+        <div class="previousSelection">
+            <h2>{{ selection["question"] }}</h2>
+            
             <form>
-                <div class="mb-3">
+                <div class="mb-3 form-buttons">
                     {% for option in selection["options"] %}
                         {% if option == selection["answer"] %}
                             <button class="btn btn-primary" type="submit" disabled name="option" value="{{ option }}">
@@ -107,5 +109,4 @@ Quiz
             </form>
         </div>
     {% endfor %}
-</div>
 {% endblock %}

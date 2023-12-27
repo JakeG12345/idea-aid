@@ -14,54 +14,85 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
 
     <!-- https://favicon.io/emoji-favicons/money-bag/ -->
-    <link href="/static/favicon.ico" rel="icon">
+    <link href="/static/favicon.png" rel="icon">
 
     <link href="/static/styles.css" rel="stylesheet">
+    <link href="/static/nav.css" rel="stylesheet">
 
     <title>Idea Aid: {% block title %}{% endblock %}</title>
 
 </head>
 
 <body>
-    <header>
-        <div id="brand"><a class="nav-item" href="/index"><img id="nav-logo"src="/static/logo.png"></a></div>
-        <nav id="navbar">
-            <ul class="nav-content">
-                {% if session["user_id"] %}   
-                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
-                <li class="nav-item"><a class="nav-link" href="/save">Your Ideas</a></li>
-                <li class="nav-item" id="login"><a class="nav-link" href="/login">Log Out</a></li>
-                {% else %}
-                <li class="nav-item"><a class="nav-link" href="/quiz">Generator</a></li>
-                <li class="nav-item" id="register"><a class="nav-link"  href="/register">Register</a></li>
-                <li class="nav-item" id="logout"><a class="nav-link" href="/login">Log In</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-        <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-            <ul class="mobile-menu">
-                {% if session["user_id"] %}   
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/quiz">Generator</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/save">Your Ideas</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/login">Log Out</a></li>
-                {% else %}
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/quiz">Generator</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/register">Register</a></li>
-                <li class="mobile-menu-item"><a class="mobile-menu-link" href="/login">Log In</a></li>
-                {% endif %}
-            </ul>
+    <nav>
+        <div class="navbar-container">
+            <div class="side">
+                <a href="/">
+                    <img src="/static/logo.png">
+                </a>
+                <ul>
+                    <li>
+                        <a href="/generator">Generator</a>
+                    </li>
+                    <li>
+                        <a href="/save">Your Ideas</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="side">
+                <ul>
+                    {% if session["user_id"] %}
+                        <li>
+                            <a href="/login">Log Out</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="/login">Log In</a>
+                        </li>
+                        <li>
+                            <a href="/register">Sign Up</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>         
+            <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+                <ul class="mobile-menu">
+                    <li>
+                        <a href="/generator">Generator</a>
+                    </li>
+                    <li>
+                        <a href="/save">Your Ideas</a>
+                    </li>
+                    {% if session["user_id"] %}
+                        <li>
+                            <a href="/login">Log Out</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="/login">Log In</a>
+                        </li>
+                        <li>
+                            <a href="/register">Sign Up</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <script>
+                function toggleMobileMenu(menu) {
+                    menu.classList.toggle('open'); 
+                }
+            </script>
         </div>
-        <script>
-            function toggleMobileMenu(menu) {
-                menu.classList.toggle('open'); 
-            }
-        </script>
+    </nav>
+
+    <header class="text-center">
+        {% block header %}{% endblock %}
     </header>
 
-    <main class="container-fluid py-5 text-center">
+    <main class="text-center">
         {% block main %}{% endblock %}
     </main>
 </body>

@@ -1,7 +1,12 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Register
+Sign Up
+{% endblock %}
+
+{% block header %}
+    <h1>Register</h1>
+    <p>Please create a username and password so that you can access the generator and save great ideas.</p>
 {% endblock %}
 
 {% block main %}
@@ -12,13 +17,17 @@ Register
             placeholder="Username" type="text">
     </div>
     <div class="mb-3">
-        <input class="form-control mx-auto w-auto" required id="password" name="password" placeholder="Password"
-            type="password">
+        <input class="form-control mx-auto w-auto" required id="password" name="password" placeholder="Password" autocomplete="off" type="password">
     </div>
     <div class="mb-3">
-        <input class="form-control mx-auto w-auto" required id="confirmation" name="confirmation"
-            placeholder="Confirmation" type="password">
+        <input class="form-control mx-auto w-auto" required id="confirmation" name="confirmation"  autocomplete="off" placeholder="Confirmation" type="password">
     </div>
-    <button class="btn btn-primary" type="submit">Register</button>
+    <div>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
+    </div>
+    <br>
+    <p>
+        Already have an account? Log in <a href="/login">here</a>
+    </p>
 </form>
 {% endblock %}

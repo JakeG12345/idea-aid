@@ -4,17 +4,28 @@
 Log In
 {% endblock %}
 
+{% block header %}
+    <h1>Log In</h1>
+    <p>Please fill in your username and password to access the generator and your saved ideas.</p>
+{% endblock %}
+
 {% block main %}
-<p class="errorMsg">{{ message }}</p>
-<form action="/login" method="post">
-    <div class="mb-3">
-        <input class="form-control mx-auto w-auto" autocomplete="off" autofocus required id="username" name="username"
-            placeholder="Username" type="text">
-    </div>
-    <div class="mb-3">
-        <input class="form-control mx-auto w-auto" required id="password" name="password" placeholder="Password"
-            type="password">
-    </div>
-    <button class="btn btn-primary" type="submit">Log In</button>
-</form>
+    <p class="errorMsg">{{ message }}</p>
+    <form action="/login" method="post">
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" autocomplete="off" autofocus required id="username" name="username"
+                placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input class="form-control mx-auto w-auto" required id="password" name="password" placeholder="Password"
+                type="password">
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit">Log In</button>
+        </div>
+        <br>
+        <p>
+            Don't have an account? Sign up <a href="/register">here</a>
+        </p>
+    </form>
 {% endblock %}

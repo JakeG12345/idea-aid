@@ -1,32 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Charter:wght@600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
-
-
-@font-face {
-    font-family: Nanum-Gothic;
-    src: url('NanumGothic-Regular.ttf') format('truetype');
+:root {
+    --c1: #F0F7F4;
+    --c2: #D6E8E6;
+    --c3: #99E1D9;
+    --c4: #70ABAF;
+    --c5: #474E51;
+    --c6: #32292F;
 }
 
 body {
-    background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(255, 255, 255));
+    background-image: linear-gradient(to right, var(--c5), var(--c6));
+    color: var(--c2);
+    overflow-x: hidden;
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+header {
+    margin: 115px 35px 30px 35px;
+}
 
 main {
     padding-bottom: 50px;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: block;
 }
 
 h1 {
-    font-family: "Roboto Mono", monospace;
-    font-weight: bold;
-    font-size: 110px;
+    font-size: 80px;
+    color: var(--c3);
 }
 
-p {
-    font-family: "Charter";
+h2 {
+    font-size: 36px;
+    padding-bottom: 5px;
+    color: var(--c1);
+}
+
+.previousSelection {
+    padding-top: 28px;
+}
+
+.previousSelection h2 {
+    opacity: 60%;
 }
 
 .errorMsg {
@@ -34,135 +60,37 @@ p {
     font-weight: bold;
 }
 
-#nav-logo {
-    width: 211.75px;
-    height: 50px;
-    margin-top: 4px;
-}
-/* 
-.nav-item {
-    margin: 0.06vw 1.5vw 0.06vw 0.4vw;
-    font-size: larger;
-}
-
-.nav-item:hover {
-    margin: 0vw 1.44vw 0vw 0.34vw;
-    border: 0.06vw solid #3E424B;
-} */
-
-
 input {
     background-color: red;
 }
 
-ul {
+.form-buttons {
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.btn {
-    background-color: blue;
+.expand-flex {
+    display: block;
 }
 
-header {
-    padding: 0 20px;
-    margin: 0;
-    height: 56px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    background-color: #E0E9E0;
+.expand-flex .description-container {
+    margin-bottom: 32px;
 }
 
-.nav-content, .mobile-menu{
-    margin-top: 6px;
-    list-style: none;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
-.nav-link {
-    padding: 5px;
-    margin-left: 10px;
-    color: #604B4C;
-    text-decoration: none;
-}
-
-.nav-link:hover {
-    transform: scale(1.1);
-    transition: 0.3s;
-}
-
-#login,
-#register,
-#logout {
-    padding: 5px 8px;
-}
-
-#hamburger-icon {
-    display: none;
-    cursor: pointer;
-    margin: auto 0;
-}
-
-#hamburger-icon div {
-    width: 35px;
-    height: 3px;
-    background-color: grey;
-    margin: 6px 0px;
-    transition: 0.4s;
-}
-
-.open .bar1 {
-    -webkit-transform: rotate(-45deg) translate(-6px, 6px);
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.open .bar2 {
-    opacity: 0;
-}
-
-.open .bar3 {
-    -webkit-transform: rotate(45deg) translate(-6px, -8px);
-    transform: rotate(45deg) translate(-6px, -8px);
-}
-
-.open .mobile-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    /* color: blue;
-    font-size: large; */
-    background-color: rgb(0, 0, 0);
-    opacity: 80%;
-}
-
-.mobile-menu {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 0px;
-    height: calc(100vh - 56px);
-    width: 100%;
-}
-
-.mobile-menu-item, .mobile-menu-link {
-    color: rgb(208, 219, 255);
-    font-size: x-large;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    text-decoration: none;
-}
-
-@media only screen and (max-width: 600px) {
-    #navbar {
-        display: none;
+/* for desktop */
+@media only screen and (min-width: 768px) {
+    h1 {
+        font-size: 100px;
     }
 
-    #hamburger-icon {
-        display: block;
+    .expand-flex {
+        display: flex;
+        justify-content: space-around;
     }
+    
+    .expand-flex section {
+        width: 44vw;
+    }    
 }

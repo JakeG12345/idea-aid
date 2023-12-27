@@ -3,7 +3,7 @@ import re
 
 from datetime import datetime
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import login_required, apology, datetime, get_question_and_answers, get_ideas, expand_idea
 from openai import OpenAI
@@ -18,22 +18,27 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-# Bug fix v2
+# Version includes resolved changes from Jake's issue on 26/12/2023 - 23:33
+# Test 2
 
-QUESTIONS_BEFORE_IDEAS = 5
+QUESTIONS_BEFORE_IDEAS = 6
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/quiz", methods=["GET", "POST"])
-@login_required
+@app.route("/quiz")
 def quiz():
+    return redirect("/generator")
+
+@app.route("/generator", methods=["GET", "POST"])
+@login_required
+def generator():
     if request.method == "POST":
         # add selected option to selections session data
         selections = session["quiz_selections"]
 
-        if request.form.get("custom") != "":
+        if request.form.get("custom") != "" and request.form.get("custom") != None:
             selected_option = request.form.get("custom")
             options = selections[-1]["options"]
             options.append(selected_option)
@@ -46,14 +51,14 @@ def quiz():
 
         if len(selections) >= QUESTIONS_BEFORE_IDEAS:
             ideas = get_ideas(selections, client)
-            return render_template("quiz.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True)
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True)
     else:
         session["quiz_selections"] = []  # dicts with format {question, answer} - set to empty everytime start quiz (GET page)
 
     question, options = get_question_and_answers(session["quiz_selections"], client)
     session["quiz_selections"].append({"question": question, "options": options})
 
-    return render_template("quiz.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
+    return render_template("generator.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
