@@ -4,46 +4,45 @@
 Saved
 {% endblock %}
 
-{% block main %}
-<div>
+{% block header %}
     <h1>Your Saved Ideas</h1>
-    <div style="width: 700px; margin: auto;">
-        <table class="table" id="stockTable">
-            <thead>
-                <tr>
-                    <th scope="col">Title</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Expand</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for idea in ideas %}
-                <tr data-name="{{ idea.title }}">
-                    <td>{{ idea.title }}</td>
-                    <td>{{ idea.date_edited }}</td>
-                    <td class="expand" data-name="{{ idea.title }}">&rarr;</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+{% endblock %}
+
+{% block main %}
+    <div>
+        <div class="saved-ideas">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Expand</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for idea in ideas %}
+                        <tr>
+                            <td>{{ idea.title }}</td>
+                            <td>{{ idea.date_edited }}</td>
+                            <td>
+                                <form action="/expand" method="post">
+                                    <button class="btn btn-primary" name="idea" value="{{ idea.title }}" type="submit">
+                                        Expand
+                                    </button>
+                                </form>
+                            </td>
+                            <td>
+                                <form action="/delete-idea" method="post">
+                                    <button class="btn btn-danger" name="idea" value="{{ idea.title }}" type="submit">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<script>
-    document.addEventListener("DOMContentLoaded", (event) => {
-        document.body.addEventListener('click', function (event) {
-            if (event.target.matches('td.expand')) {
-                var form = document.createElement('form');
-                form.method = 'post';
-                form.action = "/expand";
-                var input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'idea';
-                input.value = event.target.dataset.name;
-                form.appendChild(input);
-                document.body.appendChild(form);
-                form.submit();
-            }
-        });
-    });
-</script>
 {% endblock %}

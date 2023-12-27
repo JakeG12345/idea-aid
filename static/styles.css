@@ -87,20 +87,14 @@ input {
     margin-bottom: 32px;
 }
 
-/* for desktop */
-@media only screen and (min-width: 768px) {
-    h1 {
-        font-size: 100px;
-    }
+.saved-ideas table {
+    background-color: var(--c1);
+}
 
-    .expand-flex {
-        display: flex;
-        justify-content: space-around;
-    }
-    
-    .expand-flex section {
-        width: 44vw;
-    }    
+.saved-ideas td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: middle;
 }
 
 .logo-text {
@@ -124,4 +118,20 @@ input {
     margin: 50px 0 20vh 0;
     font-size: 45px;
     color: #E3B77B;
+}
+
+/* for desktop */
+@media only screen and (min-width: 768px) {
+    h1 {
+        font-size: 100px;
+    }
+
+    .expand-flex {
+        display: flex;
+        justify-content: space-around;
+    }
+    
+    .expand-flex section {
+        width: 44vw;
+    }    
 }
