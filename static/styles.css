@@ -100,7 +100,7 @@ input {
 
 .logo-text {
     padding-top: 40px;
-    font-size: 270px;
+    font-size: 110px;
     font-family: Poppins;
     color: #a7a7e1;
     margin-bottom: 0;
@@ -110,14 +110,14 @@ input {
 .logo-text-ai {
     font-family: Atkinson Hyperlegible;
     font-weight: bold; 
-    font-size: 300px; 
+    font-size: 140px; 
     color: #4e4ecb;
 }
 
 #intro {
     font-weight: normal;
     margin: 50px 0 20vh 0;
-    font-size: 45px;
+    font-size: 18px;
     color: #E3B77B;
 }
 
@@ -125,6 +125,18 @@ input {
 @media only screen and (min-width: 768px) {
     h1 {
         font-size: 100px;
+    }
+
+    .logo-text {
+        font-size: 270px;
+    }
+
+    #intro {
+        font-size: 45px;
+    }
+
+    .logo-text-ai {
+        font-size: 300px;
     }
 
     .expand-flex {
