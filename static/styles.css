@@ -6,7 +6,6 @@
     --c4: #70ABAF;
     --c5: #474E51;
     --c6: #32292F;
-    --c7: #1e00ff;
 }
 
 body {
@@ -20,8 +19,8 @@ header {
 
 main {
     padding-bottom: 50px;
-    padding-left: 4px;
-    padding-right: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
     display: block;
 }
 
@@ -38,6 +37,10 @@ h2 {
 
 .previousSelection {
     padding-top: 28px;
+}
+
+.previousSelection h2 {
+    opacity: 80%;
 }
 
 .errorMsg {
