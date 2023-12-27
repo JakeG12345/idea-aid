@@ -6,6 +6,7 @@
     --c4: #70ABAF;
     --c5: #474E51;
     --c6: #32292F;
+    --c7: #1e00ff;
 }
 
 body {
@@ -48,6 +49,9 @@ input {
     background-color: red;
 }
 
-.btn {
-    background-color: blue;
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
