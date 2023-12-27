@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Charter:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@600&display=swap");
+
+@font-face {
+    font-family: 'Atkinson Hyperlegible';
+    src: url('AtkinsonHyperlegible-Regular.ttf');
+  }
+
 :root {
     --c1: #F0F7F4;
     --c2: #D6E8E6;
@@ -12,6 +20,11 @@ body {
     background-image: linear-gradient(to right, var(--c5), var(--c6));
     color: var(--c2);
     overflow-x: hidden;
+}
+
+p {
+    margin-left: 16vw;
+    margin-right: 16vw;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -93,4 +106,27 @@ input {
     .expand-flex section {
         width: 44vw;
     }    
+}
+
+.logo-text {
+    padding-top: 40px;
+    font-size: 270px;
+    font-family: Poppins;
+    color: #a7a7e1;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.logo-text-ai {
+    font-family: Atkinson Hyperlegible;
+    font-weight: bold; 
+    font-size: 300px; 
+    color: #4e4ecb;
+}
+
+#intro {
+    font-weight: normal;
+    margin: 50px 0 20vh 0;
+    font-size: 45px;
+    color: #E3B77B;
 }
