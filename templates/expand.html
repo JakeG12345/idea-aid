@@ -4,36 +4,44 @@
 More About Idea
 {% endblock %}
 
-{% block main %}
-<div>
+{% block header %}
     <h1>{{ idea }}</h1>
-    <div>
-        <div>
-            <p>
-                {{ expansion }}
-            </p>
-        </div>
+{% endblock %}
 
-        <div>
-            <h2>Similar Ideas</h2>
-            {% for idea in similar_ideas %}
-                <div class="mb-3">
-                    <div class="btn-group">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            {{ idea }}
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-item save" data-name="{{ idea }}">
-                                Save
-                            </li>
-                            <li class="dropdown-item expand" data-name="{{ idea }}">
-                                Expand
-                            </li>
-                        </ul>
-                    </div>
+{% block main %}
+    <div>
+        <div class="expand-flex">
+            <section>
+                <h2>Description</h2>
+                <p>
+                    {{ expansion }}
+                </p>
+            </section>
+
+            <section>
+                <h2>Similar Ideas</h2>
+                <div>
+                    {% for idea in similar_ideas %}
+                        <div class="mb-3">
+                            <div class="btn-group">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    {{ idea }}
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-item save" data-name="{{ idea }}">
+                                        Save
+                                    </li>
+                                    <li class="dropdown-item expand" data-name="{{ idea }}">
+                                        Expand
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </section>
+
             <script>
                 document.addEventListener("DOMContentLoaded", (event) => {
                     document.body.addEventListener('click', function (event) {
@@ -66,5 +74,4 @@ More About Idea
             </script>
         </div>
     </div>
-</div>
 {% endblock %}

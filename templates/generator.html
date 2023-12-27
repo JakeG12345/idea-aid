@@ -14,22 +14,22 @@
         <div>
             <h2>Here's what we came up with</h2>
             {% for idea in ideas %}
-            <div class="mb-3">
-                <div class="btn-group">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        {{ idea }}
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item save" data-name="{{ idea }}">
-                            Save
-                        </li>
-                        <li class="dropdown-item expand" data-name="{{ idea }}">
-                            Expand
-                        </li>
-                    </ul>
+                <div class="mb-3">
+                    <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ idea }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item save" data-name="{{ idea }}">
+                                Save
+                            </li>
+                            <li class="dropdown-item expand" data-name="{{ idea }}">
+                                Expand
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
