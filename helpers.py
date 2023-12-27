@@ -79,7 +79,7 @@ def expand_idea(idea, client):
         messages=[
             {
                 "role": "user",
-                "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. You have just given me this idea: {idea}. Please provide me with some similar ideas. IMPORTANT: You should return the possible ideas comma-separated. In other words, it should look like 'idea 1,idea 2 word word,idea 3' you get the point."
+                "content": f"Query is coming from an app that helps users come up with ideas through the help of AI. You have just given me this idea: {idea}. Please provide me with some similar ideas. IMPORTANT: You should return the possible ideas comma-separated. In other words, it should look like 'idea 1,idea 2 word word,idea 3' you get the point. Keep the word length of ideas under 5 ideally."
             }
         ]
     )
