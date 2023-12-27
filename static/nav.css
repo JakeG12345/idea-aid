@@ -1,6 +1,10 @@
 nav {
     height: 85px;
     background-color: var(--c1);
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    z-index: 5;
 }
 
 nav .navbar-container {
@@ -71,7 +75,6 @@ nav ul li a:hover {
     justify-content: flex-start;
     font-size: large;
     background-color: var(--c1);
-    /* opacity: 90%; */
 }
 
 .mobile-menu {
