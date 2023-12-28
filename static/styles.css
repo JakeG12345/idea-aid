@@ -151,3 +151,11 @@ input {
         width: 44vw;
     }    
 }
+
+a {
+    color: whitesmoke;
+}
+
+a:hover {
+    color: lightblue;
+}
