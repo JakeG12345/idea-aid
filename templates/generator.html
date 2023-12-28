@@ -6,7 +6,6 @@
 
 {% block header %}
     <h1>Idea Generator</h1>
-    <p>Please answer a few questions in this adaptive quiz to find a great idea.</p>
 {% endblock %}
 
 {% block main %}
@@ -46,26 +45,37 @@
         </div>
     {% else %}
         <div>
+            <p id="guideText">Please answer this adaptive quiz so we can generate a personalised idea just for you.</p>
             <h2>{{ current_selection["question"] }}</h2>
 
             <form action="/generator" method="post">
                 <div class="mb-3 form-buttons">
                     {% for option in current_selection["options"] %}
-                        <button class="btn btn-primary" type="submit" name="option" value="{{ option }}">
+                        <button id=answerOption class="btn btn-primary" type="submit" name="option" value="{{ option }}">
                             {{ option }}
                         </button>
                     {% endfor %}         
                 </div>
             </form>
             <form action="/generator" method="post">
-                <div class="mt-3 mx-auto" style="display: flex; width: 80vw; gap: 30px;">
-                    <input class="form-control" name="custom" required autocomplete="off"
+                <div class="mt-3 mx-auto" style="display: flex; width: 70vw; gap: 40px;">
+                    <input class="form-control" style="width: 60vw;" name="custom" required autocomplete="off"
                         placeholder="Add custom answer" type="text">
-                    <button class="btn btn-primary" style="width: 300px;" type="submit">
-                        Submit Custom Option
+                    <button class="btn btn-primary" style="width: 300px; background-color: #D3A76B" type="submit">
+                        <span style="color: black; font-weight: bold;">Submit Custom Option</span>
                     </button>       
                 </div>
             </form>
+            <script>
+                    let answerOptions = document.querySelectorAll(`#answerOption`)
+                    let guideText = document.querySelector(`#guideText`);
+                    for (let i = 0; i < answerOptions.length; i++)
+                    {
+                        answerOptions[i].addEventListener('click', function() {
+                        guideText.innerHTML=``;
+                        });
+                    }
+            </script>
         </div>
     {% endif %}
 

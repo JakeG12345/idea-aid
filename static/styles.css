@@ -5,7 +5,7 @@
 @font-face {
     font-family: 'Atkinson Hyperlegible';
     src: url('AtkinsonHyperlegible-Regular.ttf');
-  }
+}
 
 :root {
     --c1: #F0F7F4;
@@ -14,6 +14,7 @@
     --c4: #70ABAF;
     --c5: #474E51;
     --c6: #32292F;
+    --c7: #E3B77B;
 }
 
 body {
@@ -27,6 +28,10 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+button {
+    background-color: #90e0ef;
+    color: #90e0ef;
+}
 /* Hide scrollbar for IE, Edge and Firefox */
 body {
     -ms-overflow-style: none;  /* IE and Edge */
@@ -85,10 +90,6 @@ header .expand-subtext p {
     font-weight: bold;
 }
 
-input {
-    background-color: red;
-}
-
 .form-buttons {
     display: flex;
     justify-content: center;
@@ -135,7 +136,7 @@ input {
     font-weight: normal;
     margin: 80px 0 200px 0;
     font-size: 18px;
-    color: #E3B77B;
+    color: var(--c7);
 }
 
 /* for desktop */
