@@ -21,11 +21,19 @@
                             {{ idea }}
                         </button>
                         <ul class="dropdown-menu">
-                            <form action="/save" method="post">
-                                <button class="dropdown-item save" name="idea" value="{{ idea }}" type="submit">
-                                    Save
-                                </button>
-                            </form>
+                            {% if idea in saved_ideas %}
+                                <form action="/generator" method="post">
+                                    <button class="dropdown-item save" name="delete-idea" value="{{ idea }}" type="submit">
+                                        Remove from saved
+                                    </button>
+                                </form>
+                            {% else %}
+                                <form action="/generator" method="post">
+                                    <button class="dropdown-item save" name="save-idea" value="{{ idea }}" type="submit">
+                                        Save
+                                    </button>
+                                </form>
+                            {% endif %}
                             <form action="/expand" method="post">
                                 <button class="dropdown-item save" name="idea" value="{{ idea }}" type="submit">
                                     Expand

@@ -56,6 +56,22 @@ h2 {
     color: var(--c1);
 }
 
+header .expand-subtext {
+    width: 100%;
+    align-items: center;
+}
+
+header .expand-subtext span {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+header .expand-subtext p {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .previousSelection {
     padding-top: 28px;
 }
