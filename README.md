@@ -1,14 +1,25 @@
-#  Idea-AId
-#### Video Demo:  <URL HERE>
-#### Description:
-
-Idea-AId is a webapp desgned to give inspiration and ideas to people to allow them to test, develop or expand their skills in any genre, field or area. By answering questions through both pre-set and custom responses, users can expand their creativity, learn and find problems to solve. Through the use of openAI's chatGPT-4 API, questions are generated off of previous responses and the five total questions will provide input to GPT-4, which will generate multiple ideas to be used by the user. Each idea can then be expanded upon, again through the help of GPT-4, or saved. 
-
-The users' ID is stored through sessions, and their accout information and ID is stored in a database. Before accessing the generator or their saved ideas, the user must register/ create a new account through the register webpage (register.html) or login through the login webpage (login.html) - with each method having, of course, certain safeguards and restrictions. To create an account, an unused username must be entered (it will be checked against the users database), a password and confirmation must be entered (and must match), and the password must be at least eight characters and contain at least one uppercase letter, lowercase letter and digit. To login, the user must enter their username and password, and they must be valid and match. If, in either case, any of the requirements are not met (or, somehow, a field is returned blank), an appropriate error message will be delivered with the help of the apolog function from helpers.py. After this, the users id will be input into sessions and if they have created an account, the relevant information will be entered into users.db.
+# Idea AId
 
 
+## Video Demo:  <URL HERE>
 
-After this, the user can...
+
+## Description:
+
+### Intro
+'Idea AId' is a webapp that utilises AI to generate ideas and provide inspiration to people.
+
+### User Authentication
+The user's ID is stored through sessions, and their accout information and ID is stored in an SQL (Structured Query Language) database. 
+
+In order to access the generator or saved ideas, the user must be logged in. If not logged in and trying to access one of these pages, the user will be redirected to '/login' which renders 'login.html'. Here they can log in if they have an account. To do this, they must enter their username and password, and they must be valid. If the details are not found in the database (or, somehow, a field is returned blank), an appropriate error message will be delivered with the help of the 'apology' function in 'helpers.py'. After logging in successfully, the users id will be input into session. However, if a user does not have an account, they will need to sign up for one. This can be done at '/register' which renders 'register.html'. To create an account on the register page a few conditions must be met: 
+- An unused username must be entered (it will be checked against the 'users' table in the database)
+- A password and password confirmation must be entered (they must match)
+- The password must be at least eight characters 
+- The passwrod must contain at least one uppercase letter, lowercase letter and digit.
+
+If the above conditions are met, the username and password will be added to the 'users' table. The user will also be automatically logged in and hence able to access the generator and the 'Your Ideas' page.
+
 JAKE PART EVERYTHING U DID EVERY PAGE AND FUNCTION
 
 ...
