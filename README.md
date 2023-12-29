@@ -7,7 +7,7 @@
 ## Description:
 
 ### Breif Description
-'Idea AId' is a webapp that utilises AI to generate ideas and provide inspiration to people. It was created using Flask, HTML, Python, CSS, SQL, the OpenAI API and BootStrap.
+'Idea AId' is a webapp that utilises AI to generate ideas and provide inspiration to people. It was created using Flask, HTML, Python, CSS, SQL, the OpenAI API and Bootstrap.
 
 
 
@@ -58,4 +58,4 @@ The static folder contains all relevant files for styling and images, these incl
 
 During the creation of these styles we ran into a few issues - most notably the adjustments we had to make for a mobile interface. To rectify this issue, we used the @media tag to adjust styles based on the size of the users screen, with the most complicated and, for lack of a better word 'coolest' stylistic feature we implemented being the drop-down nav menu for mobile. When on a small screen, the links on the navbar dissapear, leaving just the logo and a hamburger icon. On pressing the hamburger-icon, an (extremely time consuming to code) animation plays, transforming the hamburger into an 'X' and displaying a drop-down menu with all the links that would be on the desktop navbar.
 
-Aside from CSS, some BootStrap was used. For instance, it was used to create the table of saved ideas on '/saved'.
+Aside from CSS, some Bootstrap was used. For instance, it was used to create the table of saved ideas on '/saved'.
