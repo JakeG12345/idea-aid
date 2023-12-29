@@ -43,6 +43,9 @@ Visiting the '/saved' route will render 'saved.html' - a page that displays save
 
 
 ### Expand
+The expand page located at '/expand' provides users with a detailed explanation of an idea and some similar ideas. It also allows users to save the idea or remove it from saved ideas if it is already saved.
+
+When a user is directed to '/expand', they POST the title of the idea to the server in a field called 'idea'. This idea is read by the server and provided to 2 ChatGPT OpenAI queries: one for the detailed description, and the other for similar ideas. This data is then provided to the HTML through the render_template function and displayed on the screen.
 
 
 
