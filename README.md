@@ -20,10 +20,17 @@ In order to access the generator or saved ideas, the user must be logged in. If 
 
 If the above conditions are met, the username and password will be added to the 'users' table. The user will also be automatically logged in and hence able to access the generator and the 'Your Ideas' page.
 
-JAKE PART EVERYTHING U DID EVERY PAGE AND FUNCTION
+### The Generator
+When a user goes to '/generator' they are prompted with a question which is likely very generic like 'What is the primary goal of your project or idea?'. This question has been generated from ChatGPT-4-Turbo through the OpenAI API. The query specifies for the bot to return a question and possible options with special syntax so that it can be parsed. The parsed data is then provided to the HTML via Jinja2 and displayed. There is also a custom answer box which users can use. After pressing one of the options or submitting a custom option, the title of the idea picked is posted to '/generator' where it is stored in a variable that keeps track of the selections. Then, ChatGPT is queried again through the 'get_question_and_answers' function in 'helpers.py' with the first question and answer indicating that the bot provides another question and options. This process repeats, with the questions getting more and more specific as more data is gathered. Once 5 questions has been asked, a function called 'get_ideas()' in helpers.py is called that as indicated in the name, gets ideas. It takes in the selections variable as an argument and uses that to get creative ideas from ChatGPT that would suit the user. This data is then feeded to the html and displayed. When a user clicks on an idea, they have 2 options:
+- 'Save' (saves idea as further discussed in idea saving section) or 'remove from saved' (removes idea from saved as further discussed in idea saving section)
+- 'Expand' (navigates user to expand page providing idea title as further discussed in expand section)
 
+### Expand
+
+### Idea Saving
 ...
 JT PART about saved and its database and its html page
  which stores a users username, password-hash, the date and time the account was created and the 
 
+### Styling
 The static folder contains all relevant files for styling and images - different versions of the logo for use as links, the Atkinson Hyperlegible font, styles.css for general styling (including adjustments for mobile viewing) and nav.css for specific styling of the navbar and its mobile version, with an icon and animated drop-down menu instead of links being displayed on the navbar. During the creation of these styles we ran into a few issues - most notable the adjustments we had to make for a mobile interface. To rectify this issue, we used the @media tag to adjust styles based on the size of the suers screen, with the most complicated and, for lack of a better word 'coolest' feature we implemented was the drop-down nav. When on a small screen, the links on the navbar dissapear, leaving just the logo and a hamburger icon. On clicking of the icon an (extremely time consuming to code) animation plays, transforming the hamburger into a X and displaying a drop-down menu with all the links that would be on e traditional navbar.
