@@ -132,6 +132,13 @@ header .expand-subtext p {
     color: #4e4ecb;
 }
 
+.hero {
+    padding-bottom: 30px;
+    /* display: flex;
+    justify-content: space-around;
+    align-items: center; */
+}
+
 .hero img {
     max-width: 100%;
 }
@@ -139,6 +146,11 @@ header .expand-subtext p {
 .hero p {
     margin-top: -20px;
 }
+
+.hero button {
+    margin-top: 20px;
+}
+
 
 /* for desktop */
 @media only screen and (min-width: 768px) {

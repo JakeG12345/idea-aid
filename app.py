@@ -18,11 +18,12 @@ app.secret_key = secrets.token_hex(16)
 
 db = SQL("sqlite:///db.db")
 
-QUESTIONS_BEFORE_IDEAS = 3
+QUESTIONS_BEFORE_IDEAS = 5
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    logged_in = session.get("user_id") != None
+    return render_template("index.html", logged_in=logged_in)
 
 @app.route("/generator", methods=["GET", "POST"])
 @login_required
