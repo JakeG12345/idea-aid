@@ -25,12 +25,18 @@ When a user goes to '/generator' they are prompted with a question which is like
 - 'Save' (saves idea as further discussed in idea saving section) or 'remove from saved' (removes idea from saved as further discussed in idea saving section)
 - 'Expand' (navigates user to expand page providing idea title as further discussed in expand section)
 
-### Expand
 
 ### Idea Saving
-...
-JT PART about saved and its database and its html page
- which stores a users username, password-hash, the date and time the account was created and the 
+In the SQL database, there is an ideas table with the following fields: userID, title, date_edited and ideaID (the primary key). The table is used to track saved ideas among all users.
+
+An idea can be saved from two places: '/generator' or '/expand'. Upon pressing the save button for an idea, the user is directed to '/generator' or '/expand' (depending on the page on) providing POST data with a field 'save-idea' that contains the idea title. The server then checks for the 'save-idea' field in the posted form and if found, will save the idea’s title, current user ID, and date to the database. After that, the page is rerendered and will display a delete or remove from saved option where the save button originally was.
+
+A user can also delete ideas, which functionally is done in a similar way to saving ideas. This can be done on '/generator', '/expand' and '/saved'. When recieving a POST request, these destinations' functions check for a 'remove-idea' field. It then removes that idea title provided on the server and rerenders the page, changing it depending on the idea removed.
+
+Visiting the '/saved' route will render 'saved.html' - a page displays saved ideas. On this page, there is a table with columns for the idea, the date and time it was saved, a button to expand the idea and a remove button. The expand button POSTs the title of the idea to the expand path which then renders the expand page for the idea selected (further discussed in expand section).
+
+### Expand
+
 
 ### Styling
 The static folder contains all relevant files for styling and images - different versions of the logo for use as links, the Atkinson Hyperlegible font, styles.css for general styling (including adjustments for mobile viewing) and nav.css for specific styling of the navbar and its mobile version, with an icon and animated drop-down menu instead of links being displayed on the navbar. During the creation of these styles we ran into a few issues - most notable the adjustments we had to make for a mobile interface. To rectify this issue, we used the @media tag to adjust styles based on the size of the suers screen, with the most complicated and, for lack of a better word 'coolest' feature we implemented was the drop-down nav. When on a small screen, the links on the navbar dissapear, leaving just the logo and a hamburger icon. On clicking of the icon an (extremely time consuming to code) animation plays, transforming the hamburger into a X and displaying a drop-down menu with all the links that would be on e traditional navbar.
