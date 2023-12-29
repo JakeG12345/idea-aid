@@ -51,7 +51,7 @@ When a user is directed to '/expand', they POST the title of the idea to the ser
 
 ### Styling
 The static folder contains all relevant files for styling and images, these including:
-- Different versions of the logo for use as links
+- The logo and favicon
 - The Atkinson Hyperlegible font
 - 'styles.css' for general styling (including adjustments for mobile viewing)
 - 'nav.css' for specific styling of the navbar and its mobile version - featuring a hamburger-icon and animated drop-down menu instead of a horizontal display of links as seen on the desktop navbar.
