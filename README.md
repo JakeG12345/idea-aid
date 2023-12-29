@@ -4,7 +4,7 @@
 ## Video Demo:  <URL HERE>
 
 
-## Description:
+## Description
 
 ### Breif Description
 'Idea AId' is a webapp that utilises AI to generate ideas and provide inspiration to people. It was created using Flask, HTML, Python, CSS, SQL, the OpenAI API and Bootstrap.
