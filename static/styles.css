@@ -132,11 +132,12 @@ header .expand-subtext p {
     color: #4e4ecb;
 }
 
-#intro {
-    font-weight: normal;
-    margin: 80px 0 200px 0;
-    font-size: 18px;
-    color: var(--c7);
+.hero img {
+    max-width: 100%;
+}
+
+.hero p {
+    margin-top: -20px;
 }
 
 /* for desktop */

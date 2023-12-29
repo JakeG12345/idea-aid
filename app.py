@@ -41,12 +41,12 @@ def generator():
             idea = request.form.get("save-idea")
             save_idea(idea)
             saved_ideas = get_saved_ideas_titles()
-            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=session["ideas"], has_ideas=True, saved_ideas=saved_ideas)
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=session["ideas"], len_previous_selections=QUESTIONS_BEFORE_IDEAS, has_ideas=True, saved_ideas=saved_ideas)
         elif request.form.get("delete-idea") != "" and request.form.get("delete-idea") != None:
             idea = request.form.get("delete-idea")
             delete_idea(idea)
             saved_ideas = get_saved_ideas()
-            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=session["ideas"], has_ideas=True, saved_ideas=saved_ideas)
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), len_previous_selections=QUESTIONS_BEFORE_IDEAS, ideas=session["ideas"], has_ideas=True, saved_ideas=saved_ideas)
         else:
             selected_option = request.form.get("option")
             selections[-1] = {"question": selections[-1]["question"], "answer": selected_option, "options": selections[-1]["options"]}
@@ -56,14 +56,14 @@ def generator():
             ideas = get_ideas(selections, client)
             session["ideas"] = ideas
             saved_ideas = get_saved_ideas()
-            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), ideas=ideas, has_ideas=True, saved_ideas=saved_ideas)
+            return render_template("generator.html", current_selection=None, previous_selections= reversed(selections), len_previous_selections=len(selections), ideas=ideas, has_ideas=True, saved_ideas=saved_ideas)
     else:
         session["quiz_selections"] = []  # dicts with format {question, answer} - set to empty everytime start quiz (GET page)
 
     question, options = get_question_and_answers(session["quiz_selections"], client)
     session["quiz_selections"].append({"question": question, "options": options})
 
-    return render_template("generator.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), has_ideas=False, saved_ideas=[])
+    return render_template("generator.html", current_selection=session["quiz_selections"][-1],previous_selections=reversed(session["quiz_selections"][:-1]), len_previous_selections=len(session["quiz_selections"][:-1]), has_ideas=False, saved_ideas=[])
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
